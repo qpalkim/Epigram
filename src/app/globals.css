@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --text-3xl: 32px;
+  --text-3xl--line-height: 42px;
+
+  --text-2xl: 24px;
+  --text-2xl--line-height: 32px;
+
+  --text-xl: 20px;
+  --text-xl--line-height: 32px;
+
+  --text-2lg: 18px;
+  --text-2lg--line-height: 26px;
+
+  --text-lg: 16px;
+  --text-lg--line-height: 26px;
+
+  --text-md: 14px;
+  --text-md--line-height: 24px;
+
+  --text-sm: 13px;
+  --text-sm--line-height: 22px;
+
+  --text-xs: 12px;
+  --text-xs--line-height: 20px;
+
+  /* Black */
+  --color-black-100: #f9f9f9;
+  --color-black-200: #6b6b6b;
+  --color-black-300: #5e5e5e;
+  --color-black-400: #525252;
+  --color-black-500: #454545;
+  --color-black-600: #373737;
+  --color-black-700: #2b2b2b;
+  --color-black-800: #1f1f1f;
+  --color-black-900: #121212;
+  --color-black-950: #050505;
+
+  /* Blue */
+  --color-blue-100: #ffffff;
+  --color-blue-200: #eceff4;
+  --color-blue-300: #cbd3e1;
+  --color-blue-400: #abb8ce;
+  --color-blue-500: #8b9dbc;
+  --color-blue-600: #6a82a9;
+  --color-blue-700: #52698e;
+  --color-blue-800: #40516e;
+  --color-blue-900: #2d394e;
+  --color-blue-950: #1a212d;
+
+  /* Gray */
+  --color-gray-100: #dedede;
+  --color-gray-200: #c4c4c4;
+  --color-gray-300: #ababab;
+  --color-gray-400: #919191;
+
+  /* Background */
+  --color-background-100: #f5f7fa;
+
+  /* Error */
+  --color-error-100: #ff6577;
+
+  /* Line */
+  --color-line-100: #f2f2f2;
+  --color-line-200: #cfdbea;
+
+  /* Illust */
+  --color-illust-yellow: #fbc85b;
+  --color-illust-green: #48bb98;
+  --color-illust-purple: #8e80e3;
+  --color-illust-blue: #5195ee;
+  --color-illust-red: #e46e80;
+  --color-illust-brown: #9a695e;
+
+  /* Sub */
+  --color-sub-yellow: #e8aa26;
+  --color-sub-blue-100: #eff3f8;
+  --color-sub-blue-200: #e3e9f1;
+  --color-sub-blue-300: #c7d1e0;
+  --color-sub-blue-400: #494d59;
+  --color-sub-blue-500: #3e414d;
+  --color-sub-blue-600: #3e3e3e;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.font-iropke {
+  font-family: var(--font-iropke);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.font-iropke.text-4xl {
+  font-size: 40px;
+  line-height: 52px;
+}
+
+.font-iropke.text-3xl {
+  font-size: 32px;
+  line-height: 48px;
+}
+
+.font-iropke.text-2xl {
+  font-size: 24px;
+  line-height: 40px;
+}
+
+.font-iropke.text-xl {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.font-iropke.text-lg {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.font-iropke.text-md {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.font-iropke.text-sm {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.font-iropke.text-xs {
+  font-size: 12px;
+  line-height: 18px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-pretendard);
+  min-width: 375px;
 }
