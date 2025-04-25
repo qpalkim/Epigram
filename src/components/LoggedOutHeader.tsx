@@ -1,10 +1,10 @@
 "use client";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 import logoSm from "@/assets/logo/logo-sm.svg";
 import search from "@/assets/icons/search.svg";
 import user from "@/assets/icons/user.svg";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export default function LoggedOutHeader() {
   const pathname = usePathname();
@@ -12,7 +12,7 @@ export default function LoggedOutHeader() {
 
   return (
     <>
-      <div className="fixed w-full bg-blue-100 border-b border-gray-100 z-10">
+      <header className="fixed w-full bg-blue-100 border-b border-gray-100 z-50">
         <div className="relative px-4 max-w-[1480px] mx-auto h-[52px] md:h-[70px] lg:h-[80px] flex items-center">
           {!isAuthPage && (
             <Link href="/search" className="absolute left-4">
@@ -42,7 +42,7 @@ export default function LoggedOutHeader() {
             </Link>
           )}
         </div>
-      </div>
+      </header>
     </>
   );
 }
