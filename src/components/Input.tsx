@@ -14,10 +14,6 @@ export function cn(...classes: (string | false | undefined | null)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function Item({ children }: PropsWithChildren) {
-  return <div>{children}</div>;
-}
-
 export function Label({
   required,
   children,
@@ -43,7 +39,9 @@ export function Label({
 }
 
 export function Error({ children }: PropsWithChildren) {
-  return <div className="mt-1 lg:text-md text-sm text-red-500">{children}</div>;
+  return (
+    <span className="mt-1 lg:text-md text-sm text-red-500">{children}</span>
+  );
 }
 
 export type InputProps = Field &
@@ -63,7 +61,7 @@ export default function Input({
   const id = useId();
 
   return (
-    <Item>
+    <div>
       {label && (
         <Label required={props.required} htmlFor={id}>
           {label}
@@ -84,6 +82,6 @@ export default function Input({
         aria-invalid={error ? "true" : "false"}
       />
       {error && <Error>{error}</Error>}
-    </Item>
+    </div>
   );
 }
