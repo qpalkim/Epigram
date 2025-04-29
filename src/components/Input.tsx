@@ -40,7 +40,9 @@ export function Label({
 
 export function Error({ children }: PropsWithChildren) {
   return (
-    <span className="mt-1 lg:text-md text-sm text-red-500">{children}</span>
+    <span className="block mt-2 lg:text-md text-sm text-red-500">
+      {children}
+    </span>
   );
 }
 
@@ -70,7 +72,7 @@ export default function Input({
       <input
         id={id}
         className={cn(
-          "h-[44px] lg:h-[64px] rounded-xl text-black-950 mt-2 w-full placeholder:text-blue-400 text-lg lg:text-xl bg-blue-200 border p-3 focus:outline-2",
+          "h-[44px] lg:h-[64px] rounded-xl text-black-950 mt-4 w-full placeholder:text-blue-400 text-lg lg:text-xl bg-blue-200 border p-3 focus:outline-2",
           whiteBg ? "bg-white" : undefined,
           error
             ? "border-error-100 focus:outline-error-100"
