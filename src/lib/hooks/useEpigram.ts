@@ -1,16 +1,4 @@
-"use client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  createEpigram,
-  deleteEpigram,
-  deleteLikeEpigram,
-  getEpigramCommentList,
-  getEpigrams,
-  getEpigramsDetail,
-  getEpigramsToday,
-  likeEpigram,
-  updateEpigram,
-} from "../apis/epigram";
 import {
   GetEpigramsParams,
   EpigramsResponse,
@@ -24,6 +12,17 @@ import {
   EpigramCommentListResponse,
   GetEpigramCommentListParams,
 } from "../types/epigram";
+import {
+  createEpigram,
+  deleteEpigram,
+  deleteLikeEpigram,
+  getEpigramCommentList,
+  getEpigrams,
+  getEpigramsDetail,
+  getEpigramsToday,
+  likeEpigram,
+  updateEpigram,
+} from "../apis/epigram";
 
 // 에피그램 목록 조회 훅
 export const useEpigrams = (params: GetEpigramsParams) => {
