@@ -1,13 +1,22 @@
 import { z } from "zod";
 
-// 공통 감정 5개 타입
-enum Emotion {
-  MOVED = "감동",
-  HAPPY = "기쁨",
-  WORRIED = "고민",
-  SAD = "슬픔",
-  ANGRY = "분노",
+// 공통 감정 5개 영어 타입
+export enum Emotion {
+  MOVED = "MOVED",
+  HAPPY = "HAPPY",
+  WORRIED = "WORRIED",
+  SAD = "SAD",
+  ANGRY = "ANGRY",
 }
+
+// 공통 감정 5개 한글 라벨 타입
+export const EmotionLabels: Record<Emotion, string> = {
+  [Emotion.MOVED]: "감동",
+  [Emotion.HAPPY]: "기쁨",
+  [Emotion.WORRIED]: "고민",
+  [Emotion.SAD]: "슬픔",
+  [Emotion.ANGRY]: "분노",
+};
 
 // 공통 감정 5개 Enum 타입
 const emotionLogsSchema = z.object({
