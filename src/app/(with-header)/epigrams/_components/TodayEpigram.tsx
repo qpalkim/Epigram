@@ -7,9 +7,6 @@ export default function TodayEpigram() {
 
   return (
     <>
-      <h2 className="text-black-600 font-semibold text-lg lg:text-xl mb-6 lg:mb-10">
-        오늘의 에피그램
-      </h2>
       {isLoading ? (
         <p>로딩 중...</p>
       ) : isError ? (
