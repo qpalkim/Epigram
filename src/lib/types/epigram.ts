@@ -41,13 +41,13 @@ export const getEpigramsParamsSchema = z.object({
 export type GetEpigramsParams = z.infer<typeof getEpigramsParamsSchema>;
 
 // 오늘의 에피그램 조회
-export const epigramsTodayResponseSchema = epigramSchema
+export const epigramTodayResponseSchema = epigramSchema
   .extend({
     isLiked: z.boolean().optional(),
   })
   .nullable();
 
-export type EpigramsTodayResponse = z.infer<typeof epigramsTodayResponseSchema>;
+export type EpigramTodayResponse = z.infer<typeof epigramTodayResponseSchema>;
 
 // 에피그램 상세 조회 API
 export const epigramDetailResponseSchema = epigramSchema.extend({

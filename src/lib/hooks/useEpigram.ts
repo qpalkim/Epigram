@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   GetEpigramsParams,
   EpigramsResponse,
-  EpigramsTodayResponse,
+  EpigramTodayResponse,
   EpigramDetailResponse,
   CreateEpigramResponse,
   CreateEpigramRequest,
@@ -19,7 +19,7 @@ import {
   getEpigramCommentList,
   getEpigrams,
   getEpigramsDetail,
-  getEpigramsToday,
+  getEpigramToday,
   likeEpigram,
   updateEpigram,
 } from "../apis/epigram";
@@ -33,10 +33,10 @@ export const useEpigrams = (params: GetEpigramsParams) => {
 };
 
 // 오늘의 에피그램 조회 훅
-export const useEpigramsToday = () => {
-  return useQuery<EpigramsTodayResponse>({
-    queryKey: ["epigramsToday"],
-    queryFn: () => getEpigramsToday(),
+export const useEpigramToday = () => {
+  return useQuery<EpigramTodayResponse>({
+    queryKey: ["epigramToday"],
+    queryFn: () => getEpigramToday(),
   });
 };
 

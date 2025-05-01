@@ -14,8 +14,8 @@ import {
   epigramDetailResponseSchema,
   EpigramsResponse,
   epigramsResponseSchema,
-  EpigramsTodayResponse,
-  epigramsTodayResponseSchema,
+  EpigramTodayResponse,
+  epigramTodayResponseSchema,
   GetEpigramCommentListParams,
   GetEpigramsParams,
   LikeEpigramResponse,
@@ -34,11 +34,11 @@ export const getEpigrams = async (params: GetEpigramsParams) => {
 };
 
 // 오늘의 에피그램 조회 API
-export const getEpigramsToday = async () => {
-  const response = await axiosClientHelper.get<EpigramsTodayResponse>(
+export const getEpigramToday = async () => {
+  const response = await axiosClientHelper.get<EpigramTodayResponse>(
     "/epigrams/today"
   );
-  return safeResponse(response.data, epigramsTodayResponseSchema);
+  return safeResponse(response.data, epigramTodayResponseSchema);
 };
 
 // 에피그램 상세 조회 API

@@ -1,3 +1,9 @@
+import TodayEpigram from "./_components/TodayEpigram";
+
 export default function Page() {
-  return <div>메인 에피그램 페이지</div>;
+  return (
+    <div className="max-w-[640px] mx-auto mt-[32px] lg:mt-[120px] px-6 md:px-0">
+      <TodayEpigram />
+    </div>
+  );
 }
