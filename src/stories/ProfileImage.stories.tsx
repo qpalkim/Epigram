@@ -6,6 +6,8 @@ const meta: Meta<typeof ProfileImage> = {
   component: ProfileImage,
   tags: ["autodocs"],
   argTypes: {
+    src: { control: "text" },
+    size: { control: "radio", options: ["small", "medium", "large"] },
     onClick: { action: "clicked" },
   },
 };
@@ -29,7 +31,6 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
-    src: null,
     size: "large",
     clickable: true,
   },
