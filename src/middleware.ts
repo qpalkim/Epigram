@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-const AFTER_LOGIN_DOMAIN = ["/mypage"] satisfies readonly string[];
+const AFTER_LOGIN_DOMAIN = ["/mypage", "/epigrams"] satisfies readonly string[];
 const BEFORE_LOGIN_DOMAIN = [
   "/",
   "/login",
@@ -16,7 +16,9 @@ export const middleware = async (request: NextRequest) => {
 
   const pathname = request.nextUrl.pathname.replace(/\/$/, "");
 
-  const isAfterLoginRoute = AFTER_LOGIN_DOMAIN.includes(pathname);
+  const isAfterLoginRoute = AFTER_LOGIN_DOMAIN.some((route) =>
+    pathname.startsWith(route)
+  );
   const isBeforeLoginRoute = BEFORE_LOGIN_DOMAIN.includes(pathname);
   const isLoggedIn = accessToken?.value || refreshToken?.value;
 

@@ -1,6 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLogin } from "@/lib/hooks/useAuth";
@@ -17,6 +18,7 @@ import SocialLogin from "@/components/SocialLogin";
 export default function LoginForm() {
   const { mutateAsync: login } = useLogin();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,
@@ -32,6 +34,7 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginRequest) => {
     try {
       await login(data);
+      await queryClient.invalidateQueries({ queryKey: ["users"] });
       router.push("/epigrams");
     } catch (error) {
       console.error("로그인 실패", error);
