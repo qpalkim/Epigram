@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-const AFTER_LOGIN_DOMAIN = ["/mypage", "/epigrams"] satisfies readonly string[];
+const AFTER_LOGIN_DOMAIN = [
+  "/mypage",
+  "/addepigram",
+  "/epigrams",
+] satisfies readonly string[];
 const BEFORE_LOGIN_DOMAIN = [
   "/",
   "/login",

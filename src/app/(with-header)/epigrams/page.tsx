@@ -1,6 +1,7 @@
 import TodayEpigram from "./_components/TodayEpigram";
 import EmotionLogs from "@/components/EmotionLogs";
 import LatestEpigram from "./_components/LatestEpigram";
+import FloatingButton from "@/components/FloatingButton";
 
 export default function Page() {
   return (
@@ -17,6 +18,7 @@ export default function Page() {
         최신 에피그램
       </h2>
       <LatestEpigram />
+      <FloatingButton />
     </div>
   );
 }
