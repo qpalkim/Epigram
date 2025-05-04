@@ -14,7 +14,6 @@ interface CommentItemProps {
   updatedAt: string;
   content: string;
   isMine: boolean;
-  isPrivate?: boolean;
   onUpdate: (updatedComment: UpdateCommentResponse) => void;
 }
 
