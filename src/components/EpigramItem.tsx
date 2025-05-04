@@ -17,7 +17,7 @@ export default function EpigramItem({
   isFeedPage = false,
 }: EpigramItemProps) {
   return (
-    <Link href={`/epigrams/${id}`} className="font-iropke">
+    <Link href={`/epigrams/${id}`}>
       <div
         className={clsx("font-iropke", {
           "max-w-[640px]": !isFeedPage,
