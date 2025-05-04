@@ -22,25 +22,25 @@ const epigramSchema = z.object({
 const likeSchema = epigramSchema.extend({ isLiked: z.boolean().optional() });
 
 // 에피그램 목록 조회 API 타입
-export const epigramsResponseSchema = z.object({
+export const epigramListResponseSchema = z.object({
   totalCount: z.number(),
   nextCursor: z.number().nullable(),
   list: z.array(epigramSchema),
 });
 
-export type EpigramsResponse = z.infer<typeof epigramsResponseSchema>;
+export type EpigramListResponse = z.infer<typeof epigramListResponseSchema>;
 
 // 에피그램 목록 조회 파라미터 API 타입
-export const getEpigramsParamsSchema = z.object({
+export const getEpigramListParamsSchema = z.object({
   limit: z.number(),
   cursor: z.number().optional(),
   keyword: z.string().optional(),
   writerId: z.number().optional(),
 });
 
-export type GetEpigramsParams = z.infer<typeof getEpigramsParamsSchema>;
+export type GetEpigramListParams = z.infer<typeof getEpigramListParamsSchema>;
 
-// 오늘의 에피그램 조회
+// 오늘의 에피그램 조회 API 타입
 export const epigramTodayResponseSchema = epigramSchema
   .extend({
     isLiked: z.boolean().optional(),
@@ -49,7 +49,7 @@ export const epigramTodayResponseSchema = epigramSchema
 
 export type EpigramTodayResponse = z.infer<typeof epigramTodayResponseSchema>;
 
-// 에피그램 상세 조회 API
+// 에피그램 상세 조회 API 타입
 export const epigramDetailResponseSchema = epigramSchema.extend({
   isLiked: z.boolean().optional(),
 });
@@ -107,7 +107,9 @@ export const updateEpigramResponseSchema = epigramSchema;
 export type UpdateEpigramResponse = z.infer<typeof updateEpigramResponseSchema>;
 
 // 에피그램 삭제 응답 API 타입
-export const deleteEpigramResponseSchema = z.object({});
+export const deleteEpigramResponseSchema = z.object({
+  id: z.number(),
+});
 
 export type DeleteEpigramResponse = z.infer<typeof deleteEpigramResponseSchema>;
 

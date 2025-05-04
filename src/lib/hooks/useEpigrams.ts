@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  GetEpigramsParams,
-  EpigramsResponse,
+  GetEpigramListParams,
+  EpigramListResponse,
   EpigramTodayResponse,
   EpigramDetailResponse,
   CreateEpigramResponse,
@@ -11,24 +11,24 @@ import {
   DeleteLikeEpigramResponse,
   EpigramCommentListResponse,
   GetEpigramCommentListParams,
-} from "../types/epigram";
+} from "../types/epigrams";
 import {
   createEpigram,
   deleteEpigram,
   deleteLikeEpigram,
   getEpigramCommentList,
-  getEpigrams,
-  getEpigramsDetail,
+  getEpigramList,
+  getEpigramDetail,
   getEpigramToday,
   likeEpigram,
   updateEpigram,
-} from "../apis/epigram";
+} from "../apis/epigrams";
 
 // 에피그램 목록 조회 훅
-export const useEpigrams = (params: GetEpigramsParams) => {
-  return useQuery<EpigramsResponse>({
+export const useEpigramList = (params: GetEpigramListParams) => {
+  return useQuery<EpigramListResponse>({
     queryKey: ["epigrams", params],
-    queryFn: () => getEpigrams(params),
+    queryFn: () => getEpigramList(params),
   });
 };
 
@@ -41,10 +41,10 @@ export const useEpigramToday = () => {
 };
 
 // 에피그램 상세 조회 훅
-export const useEpigramsDetail = (id: number) => {
+export const useEpigramDetail = (id: number) => {
   return useQuery<EpigramDetailResponse>({
     queryKey: ["epigramDetail", id],
-    queryFn: () => getEpigramsDetail(id!),
+    queryFn: () => getEpigramDetail(id!),
   });
 };
 

@@ -12,25 +12,28 @@ import {
   epigramCommentListResponseSchema,
   EpigramDetailResponse,
   epigramDetailResponseSchema,
-  EpigramsResponse,
-  epigramsResponseSchema,
+  EpigramListResponse,
+  epigramListResponseSchema,
+  GetEpigramCommentListParams,
   EpigramTodayResponse,
   epigramTodayResponseSchema,
-  GetEpigramCommentListParams,
-  GetEpigramsParams,
+  GetEpigramListParams,
   LikeEpigramResponse,
   likeEpigramResponseSchema,
   UpdateEpigramRequest,
   UpdateEpigramResponse,
   updateEpigramResponseSchema,
-} from "../types/epigram";
+} from "../types/epigrams";
 
 // 에피그램 목록 조회 API
-export const getEpigrams = async (params: GetEpigramsParams) => {
-  const response = await axiosClientHelper.get<EpigramsResponse>("/epigrams", {
-    params,
-  });
-  return safeResponse(response.data, epigramsResponseSchema);
+export const getEpigramList = async (params: GetEpigramListParams) => {
+  const response = await axiosClientHelper.get<EpigramListResponse>(
+    "/epigrams",
+    {
+      params,
+    }
+  );
+  return safeResponse(response.data, epigramListResponseSchema);
 };
 
 // 오늘의 에피그램 조회 API
@@ -42,7 +45,7 @@ export const getEpigramToday = async () => {
 };
 
 // 에피그램 상세 조회 API
-export const getEpigramsDetail = async (id: number) => {
+export const getEpigramDetail = async (id: number) => {
   const response = await axiosClientHelper.get<EpigramDetailResponse>(
     `/epigrams/${id}`
   );

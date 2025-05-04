@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useEpigrams } from "@/lib/hooks/useEpigram";
+import { useEpigramList } from "@/lib/hooks/useEpigrams";
 import EpigramItem from "@/components/EpigramItem";
 import Button from "@/components/Button";
 import Image from "next/image";
@@ -12,7 +12,7 @@ export default function FeedsContainer() {
   const [limit, setLimit] = useState(6);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isGridTwo, setIsGridTwo] = useState(false);
-  const { data, isLoading, isError } = useEpigrams({
+  const { data, isLoading, isError } = useEpigramList({
     limit: limit,
   });
 
