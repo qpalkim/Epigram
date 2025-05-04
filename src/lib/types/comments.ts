@@ -59,7 +59,7 @@ export const updateCommentResponseSchema = commentResponseSchema;
 
 export type UpdateCommentResponse = z.infer<typeof updateCommentResponseSchema>;
 
-// 댓글 삭제 API 타입
+// 댓글 삭제 응답 API 타입
 export const deleteCommentResponseSchema = z.object({
   id: z.number(),
 });
