@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEpigrams } from "@/lib/hooks/useEpigram";
+import { useEpigramList } from "@/lib/hooks/useEpigrams";
 import Image from "next/image";
 import plus from "@/assets/icons/plus.svg";
 import EpigramItem from "@/components/EpigramItem";
@@ -10,7 +10,7 @@ import Button from "@/components/Button";
 export default function LatestEpigram() {
   const [limit, setLimit] = useState(3);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { data, isLoading, isError } = useEpigrams({
+  const { data, isLoading, isError } = useEpigramList({
     limit: limit,
   });
 

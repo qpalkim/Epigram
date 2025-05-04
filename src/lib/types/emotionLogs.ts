@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// 공통 감정 5개 영어 타입
+// 공통 감정 5개 영어 API 타입
 export enum Emotion {
   MOVED = "MOVED",
   HAPPY = "HAPPY",
@@ -9,7 +9,7 @@ export enum Emotion {
   ANGRY = "ANGRY",
 }
 
-// 공통 감정 5개 한글 라벨 타입
+// 공통 감정 5개 한글 라벨 API 타입
 export const EmotionLabels: Record<Emotion, string> = {
   [Emotion.MOVED]: "감동",
   [Emotion.HAPPY]: "기쁨",
@@ -18,7 +18,7 @@ export const EmotionLabels: Record<Emotion, string> = {
   [Emotion.ANGRY]: "분노",
 };
 
-// 공통 감정 5개 Enum 타입
+// 공통 감정 5개 Enum API 타입
 const emotionLogsSchema = z.object({
   emotion: z.enum([
     Emotion.MOVED,

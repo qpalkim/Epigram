@@ -1,6 +1,6 @@
 "use client";
 import EpigramItem from "@/components/EpigramItem";
-import { useEpigramToday } from "@/lib/hooks/useEpigram";
+import { useEpigramToday } from "@/lib/hooks/useEpigrams";
 
 export default function TodayEpigram() {
   const { data, isLoading, isError } = useEpigramToday();

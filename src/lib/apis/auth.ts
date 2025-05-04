@@ -44,7 +44,7 @@ export const refreshToken = async () => {
   return safeResponse(response.data, refreshTokenResponseSchema);
 };
 
-// 간편 로그인 App 등록/수정 API
+// 간편 로그인 App 등록/수정 요청 API
 export const oauthApps = async (params: OauthAppRequest) => {
   const response = await axiosClientHelper.post<OAuthAppResponse>(
     "/oauthApps",
@@ -53,7 +53,7 @@ export const oauthApps = async (params: OauthAppRequest) => {
   return safeResponse(response.data, oauthAppResponseSchema);
 };
 
-// 간편 로그인 API
+// 간편 로그인 요청 API
 export const oauthLogin = async (
   provider: "google" | "naver" | "kakao",
   data: OauthRequest
