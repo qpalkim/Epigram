@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { useDeleteComment, useUpdateComment } from "@/lib/hooks/useComments";
 import { UpdateCommentResponse } from "@/lib/types/comments";
@@ -5,6 +6,9 @@ import formatTime from "@/lib/utils/formatTime";
 import Link from "next/link";
 import ProfileImage from "./ProfileImage";
 import Button from "./Button";
+import Modal from "./Modal";
+import UserInfoModal from "./UserInfoModal";
+import DeleteItemModal from "./DeleteItemModal";
 
 interface CommentItemProps {
   epigramId?: number;
@@ -15,6 +19,7 @@ interface CommentItemProps {
   content: string;
   isMine: boolean;
   onUpdate: (updatedComment: UpdateCommentResponse) => void;
+  onDelete: (id: number) => void;
 }
 
 export default function CommentItem({
@@ -26,9 +31,12 @@ export default function CommentItem({
   content,
   isMine,
   onUpdate,
+  onDelete,
 }: CommentItemProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
+  const [isUserInfoModalOpen, setIsUserInfoModalOpen] = useState(false);
+  const [isDeleteItemModalOpen, setIsDeleteItemModalOpen] = useState(false);
   const updateComment = useUpdateComment(commentId);
   const deleteComment = useDeleteComment();
 
@@ -45,6 +53,14 @@ export default function CommentItem({
     );
   };
 
+  const handleDeleteCommentItem = () => {
+    deleteComment.mutate(commentId, {
+      onSuccess: () => {
+        onDelete?.(commentId);
+      },
+    });
+  };
+
   const handleCancel = () => {
     setEditedContent(content);
     setIsEditing(false);
@@ -55,10 +71,11 @@ export default function CommentItem({
       <hr className="border-line-200" />
       <div className="my-4 px-4 flex gap-4">
         <ProfileImage
-          size="medium"
+          size="md"
           src={image}
           clickable
           className="w-[48px] h-[48px] aspect-square"
+          onClick={() => setIsUserInfoModalOpen(true)}
         />
         <div className="w-full">
           <div className="flex justify-between">
@@ -76,7 +93,7 @@ export default function CommentItem({
                 </p>
                 <p
                   className="text-error-100 underline cursor-pointer"
-                  onClick={() => deleteComment.mutate(commentId)}
+                  onClick={() => setIsDeleteItemModalOpen(true)}
                 >
                   삭제
                 </p>
@@ -124,6 +141,25 @@ export default function CommentItem({
             </Link>
           ) : (
             <p className="mt-2 text-black-700 text-md">{content}</p>
+          )}
+
+          {isUserInfoModalOpen && (
+            <Modal onClose={() => setIsUserInfoModalOpen(false)}>
+              <UserInfoModal
+                image={image}
+                nickname={nickname}
+                onClose={() => setIsUserInfoModalOpen(false)}
+              />
+            </Modal>
+          )}
+
+          {isDeleteItemModalOpen && (
+            <Modal onClose={() => setIsDeleteItemModalOpen(false)}>
+              <DeleteItemModal
+                onCancel={() => setIsDeleteItemModalOpen(false)}
+                onDelete={handleDeleteCommentItem}
+              />
+            </Modal>
           )}
         </div>
       </div>

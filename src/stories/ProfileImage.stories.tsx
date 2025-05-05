@@ -7,7 +7,7 @@ const meta: Meta<typeof ProfileImage> = {
   tags: ["autodocs"],
   argTypes: {
     src: { control: "text" },
-    size: { control: "radio", options: ["small", "medium", "large"] },
+    size: { control: "radio", options: ["sm", "md", "lg"] },
     onClick: { action: "clicked" },
   },
 };
@@ -17,21 +17,21 @@ type Story = StoryObj<typeof ProfileImage>;
 
 export const Small: Story = {
   args: {
-    size: "small",
+    size: "sm",
     clickable: false,
   },
 };
 
 export const Medium: Story = {
   args: {
-    size: "medium",
+    size: "md",
     clickable: false,
   },
 };
 
 export const Large: Story = {
   args: {
-    size: "large",
+    size: "lg",
     clickable: true,
   },
 };

@@ -38,6 +38,12 @@ export default function CommentList() {
     );
   };
 
+  const handleDeleteComment = (id: number) => {
+    setCommentList((prevList) =>
+      prevList.filter((comment) => comment.id !== id)
+    );
+  };
+
   if (isLoading) return <p>로딩 중...</p>;
   if (isError) return <p>에러가 발생했습니다.</p>;
 
@@ -55,6 +61,7 @@ export default function CommentList() {
               updatedAt={comment.updatedAt}
               isMine={user?.id === comment.writer.id}
               onUpdate={handleUpdateComment}
+              onDelete={handleDeleteComment}
             />
           </div>
         ))}

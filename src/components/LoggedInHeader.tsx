@@ -54,7 +54,7 @@ export default function LoggedInHeader({
           </Link>
         </div>
         <Link href="/mypage" className="flex gap-2 items-center">
-          <ProfileImage src={image} size="small" clickable />
+          <ProfileImage src={image} size="sm" clickable />
           <p className="font-semibold text-md lg:text-lg text-black-600">
             {nickname}
           </p>

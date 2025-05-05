@@ -9,9 +9,9 @@ const profileImageVariants = cva(
   {
     variants: {
       size: {
-        small: "w-[28px] h-[28px] lg:w-[36px] lg:h-[36px]",
-        medium: "w-[48px] h-[48px]",
-        large: "w-[80px] h-[80px] lg:w-[140px] lg:h-[140px]",
+        sm: "w-[28px] h-[28px] lg:w-[36px] lg:h-[36px]",
+        md: "w-[48px] h-[48px]",
+        lg: "w-[80px] h-[80px] lg:w-[140px] lg:h-[140px]",
       },
       clickable: {
         true: "cursor-pointer hover:brightness-90",
@@ -19,7 +19,7 @@ const profileImageVariants = cva(
       },
     },
     defaultVariants: {
-      size: "medium",
+      size: "md",
       clickable: false,
     },
   }
