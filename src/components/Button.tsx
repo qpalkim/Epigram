@@ -17,9 +17,9 @@ const buttonVariants = cva(
       },
       size: {
         sm: "h-[32px] lg:h-[44px] text-xs lg:text-lg px-3 rounded-[8px]",
-        md: "h-[36px] lg:h-[48px] text-md lg:text-xl px-3 rounded-[12px]",
-        lg: "h-[42px] lg:h-[56px] text-lg lg:text-xl px-4 rounded-[16px]",
-        xl: "h-[48px] lg:h-[64px] text-lg lg:text-xl px-4 rounded-[16px]",
+        md: "h-[42px] lg:h-[48px] text-md lg:text-2lg px-3 rounded-[12px]",
+        lg: "h-[42px] lg:h-[56px] text-lg lg:text-2lg px-4 rounded-[16px]",
+        xl: "h-[48px] lg:h-[64px] text-lg lg:text-2lg px-4 rounded-[16px]",
       },
       disabled: {
         true: "cursor-not-allowed",
