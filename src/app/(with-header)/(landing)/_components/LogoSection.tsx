@@ -1,5 +1,6 @@
-import Image from "next/image";
+import BackgroundLines from "@/components/BackgroundLines";
 import Button from "@/components/Button";
+import Image from "next/image";
 import tornPaper from "@/assets/images/torn-paper.svg";
 import logoText from "@/assets/logo/logo-text.svg";
 
@@ -15,22 +16,7 @@ export default function LogoSection() {
           transform: "scaleY(-1)",
         }}
       />
-      <div
-        className="lg:hidden absolute top-[15px] bottom-0 left-0 right-0 z-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to bottom, #f2f2f2 1px, transparent 1px, transparent 24px)",
-          backgroundSize: "100% 24px",
-        }}
-      />
-      <div
-        className="hidden lg:block absolute top-[15px] bottom-0 left-0 right-0 z-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to bottom, #f2f2f2 1px, transparent 1px, transparent 36px)",
-          backgroundSize: "100% 36px",
-        }}
-      />
+      <BackgroundLines />
       <div className="absolute transform mx-auto -translate-x-1/2 left-1/2 top-[252px] lg:top-[400px] whitespace-nowrap">
         <Image
           src={logoText}
