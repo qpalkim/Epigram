@@ -1,3 +1,9 @@
-export default function Page() {
-  return <div>에피그램 상세 페이지</div>;
+import { notFound } from "next/navigation";
+import EpigramDetail from "./_components/EpigramDetail";
+
+export default async function Page({ params }: { params: { id: string } }) {
+  const id = Number(params.id);
+  if (isNaN(id)) notFound();
+
+  return <EpigramDetail id={Number(id)} />;
 }
