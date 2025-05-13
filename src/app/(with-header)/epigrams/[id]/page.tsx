@@ -5,5 +5,5 @@ export default function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
   if (isNaN(id)) notFound();
 
-  return <EpigramDetail id={Number(id)} />;
+  return <EpigramDetail id={id} />;
 }
