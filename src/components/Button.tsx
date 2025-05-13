@@ -43,6 +43,7 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
   href?: string;
   ariaLabel?: string;
   className?: string;
+  target?: string;
 }
 
 export default function Button({
@@ -56,6 +57,7 @@ export default function Button({
   variant,
   size,
   className,
+  target,
 }: ButtonProps) {
   const finalClassName = cn(
     buttonVariants({ variant, disabled, size }),
@@ -70,6 +72,7 @@ export default function Button({
         onClick={onClick}
         className={finalClassName}
         aria-label={ariaLabel}
+        target={target}
       >
         {children}
       </Link>
