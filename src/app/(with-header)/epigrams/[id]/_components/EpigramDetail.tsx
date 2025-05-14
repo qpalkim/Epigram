@@ -38,7 +38,7 @@ export default function EpigramDetail({ id }: { id: number }) {
     <>
       <section className="relative bg-blue-100 h-auto">
         <BackgroundLines />
-        <div className="relative w-full max-w-[640px] mx-auto max-[1250px]:px-4 min-[1251px]:px-0 py-10 z-50">
+        <div className="relative w-full max-w-[640px] mx-auto max-[1250px]:px-4 min-[1251px]:px-0 py-10 z-40">
           <div className="flex justify-between">
             <div>
               {epigramDetail?.tags.map((tag) => (
