@@ -20,10 +20,14 @@ export default function EpigramComments({ id }: { id: number }) {
   const { data: user } = useMyData();
   const [isPrivate, setIsPrivate] = useState(false);
   const [commentList, setCommentList] = useState(data?.list || []);
+  const [totalCount, setTotalCount] = useState(data?.totalCount || 0);
   const createComment = useCreateComment();
 
   useEffect(() => {
-    if (data?.list) setCommentList(data.list);
+    if (data?.list) {
+      setCommentList(data.list);
+      setTotalCount(data.totalCount);
+    }
   }, [data]);
 
   const handleLoadMore = (e: React.MouseEvent) => {
@@ -43,6 +47,7 @@ export default function EpigramComments({ id }: { id: number }) {
       {
         onSuccess: (newComment) => {
           setCommentList((prev) => [newComment, ...prev]);
+          setTotalCount((prev) => prev + 1);
           setAddContent("");
         },
       }
@@ -61,6 +66,7 @@ export default function EpigramComments({ id }: { id: number }) {
     setCommentList((prevList) =>
       prevList.filter((comment) => comment.id !== id)
     );
+    setTotalCount((prev) => Math.max(prev - 1, 0));
   };
 
   if (isLoading) return <p>로딩 중...</p>;
@@ -69,7 +75,7 @@ export default function EpigramComments({ id }: { id: number }) {
   return (
     <div className="mt-12 max-w-[640px] mx-auto mb-40 px-6 md:px-0">
       <h2 className="font-semibold text-black-600 text-lg lg:text-2lg mb-4">
-        댓글 ({data?.totalCount})
+        댓글 ({totalCount})
       </h2>
       <div className="flex gap-6">
         {user && (
