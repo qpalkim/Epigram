@@ -1,3 +1,9 @@
+import SearchContainer from "./_components/SearchContainer";
+
 export default function Page() {
-  return <div>검색 페이지</div>;
+  return (
+    <>
+      <SearchContainer />
+    </>
+  );
 }
