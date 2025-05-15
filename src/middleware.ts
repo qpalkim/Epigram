@@ -11,6 +11,7 @@ const BEFORE_LOGIN_DOMAIN = [
   "/login",
   "/signup",
   "/epigrams",
+  "/search",
 ] satisfies readonly string[];
 
 export const middleware = async (request: NextRequest) => {
