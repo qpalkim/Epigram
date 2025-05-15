@@ -155,7 +155,7 @@ export default function EpigramComments({ id }: { id: number }) {
                 alt="더보기 아이콘"
                 className="lg:mr-2 w-[20px] lg:w-[24px]"
               />
-              최신 댓글 더보기
+              댓글 더보기
             </Button>
           )}
         </>
