@@ -48,10 +48,10 @@ export default function CreateEpigramForm() {
     data.referenceUrl = data.referenceUrl || undefined;
 
     mutate(data, {
-      onSuccess: () => {
+      onSuccess: (createdEpigram) => {
         toast.success("에피그램이 성공적으로 등록되었습니다!");
         reset();
-        router.push("/epigrams");
+        router.push(`/epigrams/${createdEpigram.id}`);
       },
       onError: () => {
         toast.error("등록에 실패했습니다.");
@@ -169,17 +169,15 @@ export default function CreateEpigramForm() {
             <div key={index} className="flex gap-2 items-center mt-4">
               <span className="text-md lg:text-lg bg-blue-200 rounded-xl px-2 py-1 text-black-300">
                 {tag}
-                <button
+
+                <Image
+                  src={xGray}
+                  alt="태그 삭제 아이콘"
+                  width={14}
+                  height={14}
+                  className="inline-block ml-1 cursor-pointer pb-0.5"
                   onClick={() => updateTags(tags.filter((_, i) => i !== index))}
-                >
-                  <Image
-                    src={xGray}
-                    alt="태그 삭제 아이콘"
-                    width={14}
-                    height={14}
-                    className="inline-block ml-1 cursor-pointer pb-0.5"
-                  />
-                </button>
+                />
               </span>
             </div>
           ))}
