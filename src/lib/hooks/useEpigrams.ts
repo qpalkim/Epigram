@@ -43,7 +43,7 @@ export const useEpigramToday = () => {
 // 에피그램 상세 조회 훅
 export const useEpigramDetail = (id: number) => {
   return useQuery<EpigramDetailResponse>({
-    queryKey: ["epigramDetail", id],
+    queryKey: ["epigrams", id],
     queryFn: () => getEpigramDetail(id!),
   });
 };
@@ -64,8 +64,8 @@ export const useUpdateEpigram = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: UpdateEpigramRequest) => updateEpigram(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["epigrams"] });
+    onSuccess: (updatedEpigram) => {
+      queryClient.setQueryData(["epigrams", id], updatedEpigram);
     },
   });
 };

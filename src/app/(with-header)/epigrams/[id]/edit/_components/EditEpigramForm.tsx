@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateEpigram } from "@/lib/hooks/useEpigrams";
+import { useEpigramDetail, useUpdateEpigram } from "@/lib/hooks/useEpigrams";
 import {
-  CreateEpigramRequest,
-  createEpigramRequestSchema,
+  UpdateEpigramRequest,
+  updateEpigramRequestSchema,
 } from "@/lib/types/epigrams";
 import { toast } from "react-toastify";
 import Input from "@/components/Input";
@@ -14,9 +14,12 @@ import Button from "@/components/Button";
 import Image from "next/image";
 import xGray from "@/assets/icons/x-gray.svg";
 
-export default function CreateEpigramForm() {
-  const { mutate } = useCreateEpigram();
+export default function EditEpigramForm() {
+  const params = useParams();
   const router = useRouter();
+  const id = Number(params.id);
+  const { data: epigramData, isLoading } = useEpigramDetail(id);
+  const { mutate } = useUpdateEpigram(id);
 
   const {
     register,
@@ -25,15 +28,29 @@ export default function CreateEpigramForm() {
     setValue,
     watch,
     formState: { errors, isValid },
-  } = useForm<CreateEpigramRequest>({
-    resolver: zodResolver(createEpigramRequestSchema),
+  } = useForm<UpdateEpigramRequest>({
+    resolver: zodResolver(updateEpigramRequestSchema),
     mode: "onChange",
     defaultValues: {
+      content: "",
+      author: "",
       referenceTitle: "",
       referenceUrl: "",
       tags: [],
     },
   });
+
+  useEffect(() => {
+    if (epigramData) {
+      reset({
+        content: epigramData.content,
+        author: epigramData.author,
+        referenceTitle: epigramData.referenceTitle || "",
+        referenceUrl: epigramData.referenceUrl || "",
+        tags: epigramData.tags?.map((tag) => tag.name) || [],
+      });
+    }
+  }, [epigramData, reset]);
 
   const tags = watch("tags");
   const [tagInput, setTagInput] = useState("");
@@ -43,18 +60,18 @@ export default function CreateEpigramForm() {
     setValue("tags", newTags, { shouldValidate: true });
   };
 
-  const onSubmit = (data: CreateEpigramRequest) => {
+  const onSubmit = (data: UpdateEpigramRequest) => {
     data.referenceTitle = data.referenceTitle || undefined;
     data.referenceUrl = data.referenceUrl || undefined;
 
     mutate(data, {
-      onSuccess: (createdEpigram) => {
-        toast.success("에피그램이 성공적으로 등록되었습니다!");
-        reset();
-        router.push(`/epigrams/${createdEpigram.id}`);
+      onSuccess: (updatedEpigram) => {
+        toast.success("에피그램이 수정되었습니다!");
+        router.push(`/epigrams/${updatedEpigram.id}`);
       },
-      onError: () => {
-        toast.error("등록에 실패했습니다.");
+      onError: (error) => {
+        toast.error("수정에 실패했습니다.");
+        console.error(error);
       },
     });
   };
@@ -90,6 +107,8 @@ export default function CreateEpigramForm() {
     }
   };
 
+  if (isLoading) return <div>로딩 중</div>;
+
   return (
     <form
       className="space-y-[40px]"
@@ -99,7 +118,7 @@ export default function CreateEpigramForm() {
       }}
     >
       <h2 className="text-black-600 font-semibold text-lg lg:text-xl mb-6 lg:mb-10">
-        에피그램 만들기
+        에피그램 수정
       </h2>
 
       <div>
@@ -190,7 +209,7 @@ export default function CreateEpigramForm() {
         disabled={!isValid}
         className="w-full mt-16 mb-8 lg:mb-30"
       >
-        작성 완료
+        수정 완료
       </Button>
     </form>
   );
