@@ -81,18 +81,15 @@ export type CreateEpigramResponse = z.infer<typeof createEpigramResponseSchema>;
 // 에피그램 수정 요청 API 타입
 export const updateEpigramRequestSchema = z.object({
   tags: z
-    .array(
-      z.object({
-        name: z.string().min(1).max(10),
-      })
-    )
+    .array(z.string().min(1).max(10))
+    .min(1, { message: "최소 1개의 태그를 입력해 주세요." })
     .max(3),
-  referenceUrl: z.string().url().optional(),
+  referenceUrl: z.string().url().or(z.literal("")).optional(),
   referenceTitle: z.string().max(100).optional(),
   author: z.string().min(1, { message: "저자를 입력해 주세요." }).max(30),
   content: z
     .string()
-    .min(1)
+    .min(1, { message: "내용을 입력해 주세요." })
     .max(500, { message: "500자 이내로 입력해 주세요." }),
 });
 
