@@ -24,7 +24,7 @@ export default function CreateEpigramForm() {
     reset,
     setValue,
     watch,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<CreateEpigramRequest>({
     resolver: zodResolver(createEpigramRequestSchema),
     mode: "onChange",
@@ -186,7 +186,12 @@ export default function CreateEpigramForm() {
         </div>
       </div>
 
-      <Button type="submit" size="xl" className="w-full mt-16 mb-8 lg:mb-30">
+      <Button
+        type="submit"
+        size="xl"
+        disabled={!isValid}
+        className="w-full mt-16 mb-8 lg:mb-30"
+      >
         작성 완료
       </Button>
     </form>
