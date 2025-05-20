@@ -1,3 +1,14 @@
+import UserContainer from "./_components/UserContainer";
+import MyItems from "./_components/MyItems";
+import { UserProfileProvider } from "@/lib/contexts/UserProfileContext";
+
 export default function Page() {
-  return <div>마이 페이지</div>;
+  return (
+    <UserProfileProvider>
+      <div className="h-full mb-40">
+        <UserContainer />
+        <MyItems />
+      </div>
+    </UserProfileProvider>
+  );
 }
