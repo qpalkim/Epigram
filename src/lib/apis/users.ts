@@ -9,6 +9,9 @@ import {
   GetUserCommentListParams,
   UserCommentListResponse,
   userCommentListResponseSchema,
+  CreateProfileImageParams,
+  ProfileImageUrlResponse,
+  profileImageUrlResponseSchema,
 } from "../types/users";
 
 // 내 정보 조회 API
@@ -42,4 +45,18 @@ export const getUserCommentList = async (
     { params }
   );
   return safeResponse(response.data, userCommentListResponseSchema);
+};
+
+// 프로필 이미지 URL 생성 API
+export const postFileImageUrl = async (params: CreateProfileImageParams) => {
+  const response = await axiosClientHelper.post<ProfileImageUrlResponse>(
+    "/images/upload",
+    params,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return safeResponse(response.data, profileImageUrlResponseSchema);
 };

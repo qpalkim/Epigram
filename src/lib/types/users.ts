@@ -14,8 +14,8 @@ export type UserResponse = z.infer<typeof userResponseSchema>;
 
 // 내 정보 수정 요청 API 타입
 export const updateUserRequestSchema = z.object({
-  image: z.string().url().nullable(),
-  nickname: z.string().min(1).max(30),
+  image: z.string().url().nullable().optional(),
+  nickname: z.string().min(1).max(30).optional(),
 });
 
 export type UpdateUserRequest = z.infer<typeof updateUserRequestSchema>;
@@ -57,3 +57,40 @@ export const getUserCommentListParams = z.object({
 });
 
 export type GetUserCommentListParams = z.infer<typeof getUserCommentListParams>;
+
+// 프로필 이미지 URL 생성 API 타입
+export const profileImageUrlSchema = z
+  .instanceof(File)
+  .refine(
+    (file) =>
+      [
+        "image/jpg",
+        "image/jpeg",
+        "image/png",
+        "image/ico",
+        "image/gif",
+        "image/webp",
+      ].includes(file.type),
+    {
+      message: "지원되지 않는 이미지 파일입니다.",
+    }
+  )
+  .refine((file) => file.size < 5 * 1024 * 1024, {
+    message: "5MB 이하의 파일만 등록이 가능합니다.",
+  });
+
+export type ProfileImageUrl = z.infer<typeof profileImageUrlSchema>;
+
+// 프로필 이미지 URL 생성 요청 파라미터 API 타입
+export interface CreateProfileImageParams {
+  image: File;
+}
+
+// 프로필 이미지 URL 생성 응답 API 타입
+export const profileImageUrlResponseSchema = z.object({
+  url: z.string().url(),
+});
+
+export type ProfileImageUrlResponse = z.infer<
+  typeof profileImageUrlResponseSchema
+>;
