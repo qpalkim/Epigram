@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  CreateProfileImageParams,
   GetUserCommentListParams,
+  profileImageUrlSchema,
   UpdateUserRequest,
   UserCommentListResponse,
   UserResponse,
@@ -9,6 +11,7 @@ import {
   getMyData,
   getUserCommentList,
   getUserData,
+  postFileImageUrl,
   updateMyData,
 } from "../apis/users";
 
@@ -56,5 +59,17 @@ export const useUserCommentList = (
   return useQuery<UserCommentListResponse>({
     queryKey: ["users", id, params],
     queryFn: () => getUserCommentList(id!, params),
+  });
+};
+
+// 프로필 이미지 URL 생성 훅
+export const useProfileImage = () => {
+  return useMutation({
+    mutationFn: async (params: CreateProfileImageParams) => {
+      const { image } = params;
+      profileImageUrlSchema.parse(image);
+      const response = await postFileImageUrl(params);
+      return response;
+    },
   });
 };
