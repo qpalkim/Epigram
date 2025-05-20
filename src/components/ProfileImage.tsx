@@ -26,7 +26,7 @@ const profileImageVariants = cva(
 );
 
 interface ProfileImageProps extends VariantProps<typeof profileImageVariants> {
-  src: string | null;
+  src: string | null | undefined;
   className?: string;
   clickable?: boolean;
   onClick?: () => void;
