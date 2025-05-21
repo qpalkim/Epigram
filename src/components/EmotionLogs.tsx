@@ -1,6 +1,10 @@
 "use client";
-import { useState } from "react";
-import { useCreateEmotionLogsToday } from "@/lib/hooks/useEmotionLogs";
+import { useEffect, useState } from "react";
+import {
+  useCreateEmotionLogsToday,
+  useEmotionLogsToday,
+} from "@/lib/hooks/useEmotionLogs";
+import { useMyData } from "@/lib/hooks/useUsers";
 import { Emotion, EmotionLabels } from "@/lib/types/emotionLogs";
 import Image from "next/image";
 import moved from "@/assets/emotion/moved.svg";
@@ -41,18 +45,31 @@ const emotionColors: Record<Emotion, { base: string; hover: string }> = {
 };
 
 export default function EmotionLogs() {
+  const { data: user } = useMyData();
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(null);
+  const { data: todayEmotionData, isLoading } = useEmotionLogsToday(user?.id);
   const mutation = useCreateEmotionLogsToday();
+
+  useEffect(() => {
+    if (todayEmotionData?.emotion) {
+      setSelectedEmotion(todayEmotionData.emotion as Emotion);
+    }
+  }, [todayEmotionData]);
 
   const handleEmotionClick = (emotion: Emotion) => {
     setSelectedEmotion(emotion);
     mutation.mutate({ emotion });
   };
 
+  if (isLoading) return <div>로딩 중...</div>;
+
   return (
     <div className="flex justify-center gap-4">
       {emotions.map((emotion) => (
-        <div key={emotion.label} className="w-[56px] md:w-[96px] aspect-square">
+        <div
+          key={emotion.label}
+          className="min-w-[56px] max-w-[96px] w-full aspect-square"
+        >
           <div
             onClick={() => handleEmotionClick(emotion.label)}
             className={`w-full h-full flex items-center justify-center hover:bg-blue-100
@@ -73,10 +90,16 @@ export default function EmotionLogs() {
             <Image
               src={emotion.icon}
               alt={`${emotion.label} 아이콘`}
-              className="relative w-[32px] md:w-[48px] aspect-square"
+              className="relative w-[36px] md:w-[48px] aspect-square"
             />
           </div>
-          <p className="mt-2 font-semibold text-gray-400 text-center text-md md:text-lg">
+          <p
+            className={`mt-2 font-semibold text-center text-md md:text-lg ${
+              selectedEmotion === emotion.label
+                ? "text-sub-blue-600"
+                : "text-gray-400"
+            }`}
+          >
             {EmotionLabels[emotion.label]}
           </p>
         </div>

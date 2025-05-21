@@ -53,9 +53,9 @@ export default function LoggedInHeader({
             검색
           </Link>
         </div>
-        <Link href="/mypage" className="flex gap-2 items-center">
+        <Link href="/mypage" className="flex gap-1 items-center">
           <ProfileImage src={image} size="sm" clickable />
-          <p className="font-semibold text-md lg:text-lg text-black-600">
+          <p className="font-semibold text-md lg:text-lg text-black-600  hover:bg-line-100 px-2 py-1 rounded-xl">
             {nickname}
           </p>
         </Link>
