@@ -59,7 +59,7 @@ export type EmotionLogsMonthlyResponse = z.infer<
 
 // 월별 감정 조회 파라미터 API 타입
 export const getEmotionLogsMonthlyParamsShema = z.object({
-  userId: z.number(),
+  userId: z.number().optional(),
   year: z.number(),
   month: z.number(),
 });
