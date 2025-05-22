@@ -6,7 +6,7 @@ import UserProfile from "./UserProfile";
 export default function UserContainer() {
   return (
     <div
-      className="relative bg-blue-100 w-full h-[1004px] rounded-3xl mt-16 lg:mt-32"
+      className="relative bg-blue-100 w-full rounded-3xl mt-16 lg:mt-32"
       style={{
         filter: "drop-shadow(0px 0px 36px rgba(0,0,0,0.05))",
       }}
