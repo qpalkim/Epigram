@@ -6,6 +6,7 @@ import {
 } from "@/lib/hooks/useEmotionLogs";
 import { useMyData } from "@/lib/hooks/useUsers";
 import { Emotion, EmotionLabels } from "@/lib/types/emotionLogs";
+import { toast } from "react-toastify";
 import Image from "next/image";
 import moved from "@/assets/emotion/moved.svg";
 import happy from "@/assets/emotion/happy.svg";
@@ -59,6 +60,7 @@ export default function EmotionLogs() {
   const handleEmotionClick = (emotion: Emotion) => {
     setSelectedEmotion(emotion);
     mutation.mutate({ emotion });
+    toast.success("오늘의 감정이 선택되었습니다.");
   };
 
   if (isLoading) return <div>로딩 중...</div>;
