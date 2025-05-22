@@ -24,7 +24,7 @@ export default function SelectOption({ options }: SelectOptionProps) {
     <div ref={ref} className="relative inline-block">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex gap-1 cursor-pointer text-md items-center bg-background-100 text-gray-300 border border-blue-950 font-semibold px-3 py-1 rounded-lg"
+        className="flex gap-1 cursor-pointer text-md items-center bg-background-100 text-gray-300 font-semibold px-3 py-1 rounded-lg"
       >
         {selectedLabel || "필터"}
         <Image src={arrow} width={16} height={16} alt="셀렉트 옵션 아이콘" />
