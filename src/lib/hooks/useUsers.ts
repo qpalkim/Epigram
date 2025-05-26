@@ -53,12 +53,13 @@ export const useUserData = (id: number) => {
 
 // 유저 댓글 목록 조회 훅
 export const useUserCommentList = (
-  id: number,
+  id: number | undefined,
   params: GetUserCommentListParams
 ) => {
   return useQuery<UserCommentListResponse>({
     queryKey: ["users", id, params],
     queryFn: () => getUserCommentList(id!, params),
+    enabled: !!id,
   });
 };
 
