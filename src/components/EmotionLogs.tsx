@@ -8,18 +8,13 @@ import { useMyData } from "@/lib/hooks/useUsers";
 import { Emotion, EmotionLabels } from "@/lib/types/emotionLogs";
 import { toast } from "react-toastify";
 import Image from "next/image";
-import moved from "@/assets/emotion/moved.svg";
-import happy from "@/assets/emotion/happy.svg";
-import worried from "@/assets/emotion/worried.svg";
-import sad from "@/assets/emotion/sad.svg";
-import angry from "@/assets/emotion/angry.svg";
 
 const emotions = [
-  { label: Emotion.MOVED, icon: moved },
-  { label: Emotion.HAPPY, icon: happy },
-  { label: Emotion.WORRIED, icon: worried },
-  { label: Emotion.SAD, icon: sad },
-  { label: Emotion.ANGRY, icon: angry },
+  { label: Emotion.MOVED, icon: "/emotion/moved.svg" },
+  { label: Emotion.HAPPY, icon: "/emotion/happy.svg" },
+  { label: Emotion.WORRIED, icon: "/emotion/worried.svg" },
+  { label: Emotion.SAD, icon: "/emotion/sad.svg" },
+  { label: Emotion.ANGRY, icon: "/emotion/angry.svg" },
 ];
 
 const emotionColors: Record<Emotion, { base: string; hover: string }> = {
@@ -92,6 +87,8 @@ export default function EmotionLogs() {
             <Image
               src={emotion.icon}
               alt={`${emotion.label} 아이콘`}
+              width={24}
+              height={24}
               className="relative w-[36px] md:w-[48px] aspect-square"
             />
           </div>
