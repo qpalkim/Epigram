@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useDeleteComment, useUpdateComment } from "@/lib/hooks/useComments";
 import { UpdateCommentResponse } from "@/lib/types/comments";
+import { toast } from "react-toastify";
 import formatTime from "@/lib/utils/formatTime";
 import Link from "next/link";
 import ProfileImage from "./ProfileImage";
@@ -48,6 +49,7 @@ export default function CommentItem({
         onSuccess: (updateComment) => {
           onUpdate(updateComment);
           setIsEditing(false);
+          toast.success("댓글이 수정되었습니다.");
         },
       }
     );
@@ -57,6 +59,7 @@ export default function CommentItem({
     deleteComment.mutate(commentId, {
       onSuccess: () => {
         onDelete?.(commentId);
+        toast.success("댓글이 삭제되었습니다.");
       },
     });
   };
