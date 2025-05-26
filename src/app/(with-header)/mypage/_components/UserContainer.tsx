@@ -1,7 +1,6 @@
-import TodayEmotion from "./TodayEmotion";
-import MonthlyEmotion from "./MonthlyEmotion";
-import Emotionchart from "./EmotionChart";
 import UserProfile from "./UserProfile";
+import TodayEmotion from "./TodayEmotion";
+import EmotionDashboard from "./EmotionDashboard";
 
 export default function UserContainer() {
   return (
@@ -11,12 +10,11 @@ export default function UserContainer() {
         filter: "drop-shadow(0px 0px 36px rgba(0,0,0,0.05))",
       }}
     >
-      <div className="max-w-[640px] w-full mx-auto px-6 md:px-0">
+      <div className="max-w-[640px] w-full mx-auto px-6 md:px-0 pb-9 md:pb-14 lg:pb-25">
         <UserProfile />
         <div className="pt-[180px] lg:pt-[275px] space-y-[60px] lg:space-y-[165px]">
           <TodayEmotion />
-          <MonthlyEmotion />
-          <Emotionchart />
+          <EmotionDashboard />
         </div>
       </div>
     </div>
