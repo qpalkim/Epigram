@@ -19,7 +19,7 @@ import {
 // 회원가입 훅
 export const useSignup = () => {
   return useMutation({
-    mutationFn: (params: SignupRequest) => signup(params),
+    mutationFn: (data: SignupRequest) => signup(data),
   });
 };
 

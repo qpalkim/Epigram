@@ -24,7 +24,6 @@ export const signupRequestSchema = z
       .string()
       .min(1, { message: "닉네임을 입력해 주세요." })
       .max(30, { message: "닉네임은 30자 이하로 입력해 주세요." }),
-    image: z.string().url().optional(),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     message: "비밀번호가 일치하지 않습니다.",
