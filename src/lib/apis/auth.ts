@@ -7,14 +7,14 @@ import {
   RefreshTokenResponse,
   refreshTokenResponseSchema,
   OauthRequest,
-  SignupRequest,
+  SignUpRequest,
   OauthAppRequest,
   OAuthAppResponse,
   oauthAppResponseSchema,
 } from "../types/auth";
 
 // 회원가입 요청 API
-export const signup = async (data: SignupRequest) => {
+export const signUp = async (data: SignUpRequest) => {
   const response = await axiosClientHelper.post<AuthResponse>(
     "/auth/signUp",
     data

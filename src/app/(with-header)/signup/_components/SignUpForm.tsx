@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLogin, useSignup } from "@/lib/hooks/useAuth";
-import { SignupRequest, signupRequestSchema } from "@/lib/types/auth";
+import { useLogin, useSignUp } from "@/lib/hooks/useAuth";
+import { SignUpRequest, signUpRequestSchema } from "@/lib/types/auth";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
@@ -17,7 +17,7 @@ import Button from "@/components/Button";
 import SocialLogin from "@/components/SocialLogin";
 
 export default function SignUpForm() {
-  const { mutateAsync: signup } = useSignup();
+  const { mutateAsync: signUp } = useSignUp();
   const { mutateAsync: login } = useLogin();
   const router = useRouter();
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -28,14 +28,14 @@ export default function SignUpForm() {
     trigger,
     setError,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<SignupRequest>({
-    resolver: zodResolver(signupRequestSchema),
+  } = useForm<SignUpRequest>({
+    resolver: zodResolver(signUpRequestSchema),
     mode: "onChange",
   });
 
-  const onSubmit = async (data: SignupRequest) => {
+  const onSubmit = async (data: SignUpRequest) => {
     try {
-      await signup(data);
+      await signUp(data);
       const { email, password } = data;
       await login({ email, password });
       toast.success("회원가입에 성공했습니다.");

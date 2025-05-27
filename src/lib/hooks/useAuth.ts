@@ -3,7 +3,7 @@ import {
   LoginRequest,
   AuthResponse,
   RefreshTokenResponse,
-  SignupRequest,
+  SignUpRequest,
   OauthRequest,
   OauthAppRequest,
   OAuthAppResponse,
@@ -13,13 +13,13 @@ import {
   oauthApps,
   oauthLogin,
   refreshToken,
-  signup,
+  signUp,
 } from "../apis/auth";
 
 // 회원가입 훅
-export const useSignup = () => {
+export const useSignUp = () => {
   return useMutation({
-    mutationFn: (data: SignupRequest) => signup(data),
+    mutationFn: (data: SignUpRequest) => signUp(data),
   });
 };
 

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // 회원가입 요청 API 타입
-export const signupRequestSchema = z
+export const signUpRequestSchema = z
   .object({
     email: z
       .string()
@@ -30,7 +30,7 @@ export const signupRequestSchema = z
     path: ["passwordConfirmation"],
   });
 
-export type SignupRequest = z.infer<typeof signupRequestSchema>;
+export type SignUpRequest = z.infer<typeof signUpRequestSchema>;
 
 // 로그인 요청 API 타입
 export const loginRequestSchema = z.object({
