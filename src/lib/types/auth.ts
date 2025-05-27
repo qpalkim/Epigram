@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // 회원가입 요청 API 타입
-export const signupRequestSchema = z
+export const signUpRequestSchema = z
   .object({
     email: z
       .string()
@@ -24,14 +24,13 @@ export const signupRequestSchema = z
       .string()
       .min(1, { message: "닉네임을 입력해 주세요." })
       .max(30, { message: "닉네임은 30자 이하로 입력해 주세요." }),
-    image: z.string().url().optional(),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     message: "비밀번호가 일치하지 않습니다.",
     path: ["passwordConfirmation"],
   });
 
-export type SignupRequest = z.infer<typeof signupRequestSchema>;
+export type SignUpRequest = z.infer<typeof signUpRequestSchema>;
 
 // 로그인 요청 API 타입
 export const loginRequestSchema = z.object({
