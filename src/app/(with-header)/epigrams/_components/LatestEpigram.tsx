@@ -6,6 +6,7 @@ import Image from "next/image";
 import plus from "@/assets/icons/plus.svg";
 import EpigramItem from "@/components/EpigramItem";
 import Button from "@/components/Button";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function LatestEpigram() {
   const [limit, setLimit] = useState(3);
@@ -27,7 +28,7 @@ export default function LatestEpigram() {
     }
   };
 
-  if (isLoading) return <p>로딩 중...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <p>에러가 발생했습니다.</p>;
 
   return (

@@ -6,6 +6,7 @@ import { Emotion } from "@/lib/types/emotionLogs";
 import Calendar, { CalendarProps } from "react-calendar";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import SelectOption from "@/components/SelectOption";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import Image from "next/image";
 import chevronLeft from "@/assets/icons/chevron-left.svg";
 import chevornRight from "@/assets/icons/chevron-right.svg";
@@ -92,7 +93,7 @@ export default function EmotionDashboard() {
     { name: "", value: 0 }
   ).name as Emotion;
 
-  if (isLoading) return <div>로딩 중...</div>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="relative flex flex-col">

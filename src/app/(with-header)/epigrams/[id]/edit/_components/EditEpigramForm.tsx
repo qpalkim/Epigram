@@ -11,6 +11,7 @@ import {
 import { toast } from "react-toastify";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import Image from "next/image";
 import xGray from "@/assets/icons/x-gray.svg";
 
@@ -107,7 +108,7 @@ export default function EditEpigramForm() {
     }
   };
 
-  if (isLoading) return <div>로딩 중</div>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <form

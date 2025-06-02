@@ -10,6 +10,7 @@ import tornPaper from "@/assets/images/torn-paper.svg";
 import BackgroundLines from "@/components/BackgroundLines";
 import Button from "@/components/Button";
 import Dropdown from "@/components/Dropdown";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import Modal from "@/components/Modal";
 import DeleteItemModal from "@/components/DeleteItemModal";
 
@@ -31,7 +32,7 @@ export default function EpigramDetail({ id }: { id: number }) {
     });
   };
 
-  if (isLoading) return <p>로딩 중...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <p>에러가 발생했습니다.</p>;
 
   return (
