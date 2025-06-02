@@ -10,6 +10,7 @@ import { logout } from "@/lib/actions/logoutAction";
 import { toast } from "react-toastify";
 import Button from "@/components/Button";
 import ProfileImage from "@/components/ProfileImage";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function UserProfile() {
   const { data: user, isLoading, isError } = useMyData();
@@ -70,7 +71,7 @@ export default function UserProfile() {
     }
   }, [state]);
 
-  if (isLoading) return <div>로딩 중...</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <div>에러가 발생했습니다.</div>;
 
   return (

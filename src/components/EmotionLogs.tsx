@@ -7,6 +7,7 @@ import {
 import { useMyData } from "@/lib/hooks/useUsers";
 import { Emotion, EmotionLabels } from "@/lib/types/emotionLogs";
 import { toast } from "react-toastify";
+import LoadingSpinner from "./LoadingSpinner";
 import Image from "next/image";
 
 const emotions = [
@@ -41,7 +42,7 @@ const emotionColors: Record<Emotion, { base: string; hover: string }> = {
 };
 
 export default function EmotionLogs() {
-  const { data: user } = useMyData();
+  const { data: user, isLoading: isUserLoading } = useMyData();
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(null);
   const { data: todayEmotionData, isLoading } = useEmotionLogsToday(user?.id);
   const mutation = useCreateEmotionLogsToday();
@@ -58,7 +59,7 @@ export default function EmotionLogs() {
     toast.success("오늘의 감정이 선택되었습니다.");
   };
 
-  if (isLoading) return <div>로딩 중...</div>;
+  if (isUserLoading || isLoading) return <LoadingSpinner />;
 
   return (
     <div className="flex justify-center gap-4">

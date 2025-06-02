@@ -5,6 +5,7 @@ import { useMyData } from "@/lib/hooks/useUsers";
 import { UpdateCommentResponse } from "@/lib/types/comments";
 import CommentItem from "@/components/CommentItem";
 import Button from "@/components/Button";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import Image from "next/image";
 import plus from "@/assets/icons/plus.svg";
 
@@ -44,7 +45,7 @@ export default function CommentList() {
     );
   };
 
-  if (isLoading) return <p>로딩 중...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <p>에러가 발생했습니다.</p>;
 
   return (

@@ -4,6 +4,7 @@ import { useMyData, useUserCommentList } from "@/lib/hooks/useUsers";
 import { useEpigramList } from "@/lib/hooks/useEpigrams";
 import MyEpigram from "./MyEpigram";
 import MyComment from "./MyComment";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function MyItems() {
   const [activeTab, setActiveTab] = useState<"epigram" | "comment">("epigram");
@@ -30,7 +31,7 @@ export default function MyItems() {
     setLimit((prevLimit) => prevLimit + 3);
   };
 
-  if (isLoadingEpigram || isLoadingComment) return <p>로딩 중...</p>;
+  if (isLoadingEpigram || isLoadingComment) return <LoadingSpinner />;
   if (isErrorEpigram || isErrorComment) return <p>에러가 발생했습니다.</p>;
   if (!user || !myEpigram || !myComment)
     return <p>데이터를 불러올 수 없습니다.</p>;
