@@ -11,9 +11,10 @@ import { toast } from "react-toastify";
 import Button from "@/components/Button";
 import ProfileImage from "@/components/ProfileImage";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RetryError from "@/components/RetryError";
 
 export default function UserProfile() {
-  const { data: user, isLoading, isError } = useMyData();
+  const { data: user, isLoading, isError, refetch } = useMyData();
   const [state, formAction] = useActionState(logout, null);
   const { setProfileImageUrl, nickname, setNickname } = useUserProfileContext();
   const { mutate: uploadImage } = useProfileImage();
@@ -72,7 +73,7 @@ export default function UserProfile() {
   }, [state]);
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <div>에러가 발생했습니다.</div>;
+  if (isError) return <RetryError onRetry={refetch} />;
 
   return (
     <div className="absolute top-0 left-1/2 -translate-x-1/2 translate-y-[-25%] flex flex-col items-center justify-center gap-4">

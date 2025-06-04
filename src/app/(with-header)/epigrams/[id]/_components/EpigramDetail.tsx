@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { useDeleteEpigram, useEpigramDetail } from "@/lib/hooks/useEpigrams";
 import { useMyData } from "@/lib/hooks/useUsers";
 import Image from "next/image";
@@ -33,7 +33,7 @@ export default function EpigramDetail({ id }: { id: number }) {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <p>에러가 발생했습니다.</p>;
+  if (isError) return notFound();
 
   return (
     <>

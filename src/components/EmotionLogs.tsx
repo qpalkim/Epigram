@@ -8,6 +8,7 @@ import { useMyData } from "@/lib/hooks/useUsers";
 import { Emotion, EmotionLabels } from "@/lib/types/emotionLogs";
 import { toast } from "react-toastify";
 import LoadingSpinner from "./LoadingSpinner";
+import RetryError from "./RetryError";
 import Image from "next/image";
 
 const emotions = [
@@ -44,7 +45,12 @@ const emotionColors: Record<Emotion, { base: string; hover: string }> = {
 export default function EmotionLogs() {
   const { data: user, isLoading: isUserLoading } = useMyData();
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(null);
-  const { data: todayEmotionData, isLoading } = useEmotionLogsToday(user?.id);
+  const {
+    data: todayEmotionData,
+    isLoading,
+    isError,
+    refetch,
+  } = useEmotionLogsToday(user?.id);
   const mutation = useCreateEmotionLogsToday();
 
   useEffect(() => {
@@ -60,6 +66,7 @@ export default function EmotionLogs() {
   };
 
   if (isUserLoading || isLoading) return <LoadingSpinner />;
+  if (isError) return <RetryError onRetry={refetch} />;
 
   return (
     <div className="flex justify-center gap-4">

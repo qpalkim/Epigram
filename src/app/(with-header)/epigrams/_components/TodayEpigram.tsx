@@ -2,12 +2,13 @@
 import { useEpigramToday } from "@/lib/hooks/useEpigrams";
 import EpigramItem from "@/components/EpigramItem";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RetryError from "@/components/RetryError";
 
 export default function TodayEpigram() {
-  const { data, isLoading, isError } = useEpigramToday();
+  const { data, isLoading, isError, refetch } = useEpigramToday();
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <p>에러가 발생했습니다...</p>;
+  if (isError) return <RetryError onRetry={refetch} />;
 
   return (
     <>

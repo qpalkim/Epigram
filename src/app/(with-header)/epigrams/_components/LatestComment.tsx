@@ -6,12 +6,13 @@ import { UpdateCommentResponse } from "@/lib/types/comments";
 import CommentItem from "@/components/CommentItem";
 import Button from "@/components/Button";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RetryError from "@/components/RetryError";
 import Image from "next/image";
 import plus from "@/assets/icons/plus.svg";
 
-export default function CommentList() {
+export default function LatestComment() {
   const [limit, setLimit] = useState(3);
-  const { data, isLoading, isError } = useCommentList({
+  const { data, isLoading, isError, refetch } = useCommentList({
     limit: limit,
   });
   const { data: user } = useMyData();
@@ -46,7 +47,7 @@ export default function CommentList() {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <p>에러가 발생했습니다.</p>;
+  if (isError) return <RetryError onRetry={refetch} />;
 
   return (
     <>

@@ -9,13 +9,14 @@ import ProfileImage from "@/components/ProfileImage";
 import Empty from "@/components/Empty";
 import CommentItem from "@/components/CommentItem";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RetryError from "@/components/RetryError";
 import Image from "next/image";
 import plus from "@/assets/icons/plus.svg";
 
 export default function EpigramComments({ id }: { id: number }) {
   const [limit, setLimit] = useState(3);
   const [addContent, setAddContent] = useState("");
-  const { data, isLoading, isError } = useEpigramCommentList(id, {
+  const { data, isLoading, isError, refetch } = useEpigramCommentList(id, {
     limit: limit,
   });
   const { data: user } = useMyData();
@@ -71,7 +72,7 @@ export default function EpigramComments({ id }: { id: number }) {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <p>에러가 발생했습니다.</p>;
+  if (isError) return <RetryError onRetry={refetch} />;
 
   return (
     <div className="mt-12 max-w-[640px] mx-auto mb-40 px-6 md:px-0">
