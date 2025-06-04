@@ -8,6 +8,7 @@ import SearchEpigramItem from "./SearchEpigramItem";
 import Empty from "@/components/Empty";
 import Button from "@/components/Button";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RetryError from "@/components/RetryError";
 import Image from "next/image";
 import plus from "@/assets/icons/plus.svg";
 
@@ -18,7 +19,7 @@ export default function SearchContainer() {
   const [recentKeywords, setRecentKeywords] = useState<string[]>([]);
   const keyword = searchParams.get("keyword");
   const [limit, setLimit] = useState(4);
-  const { data, isLoading, isError } = useEpigramList({
+  const { data, isLoading, isError, refetch } = useEpigramList({
     limit: limit,
     keyword: searchTerm || undefined,
   });
@@ -66,7 +67,7 @@ export default function SearchContainer() {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <p>에러가 발생했습니다.</p>;
+  if (isError) return <RetryError onRetry={refetch} />;
 
   return (
     <div className="max-w-[640px] mx-auto px-6 md:px-0 mb-40">

@@ -5,6 +5,7 @@ import { useEpigramList } from "@/lib/hooks/useEpigrams";
 import MyEpigram from "./MyEpigram";
 import MyComment from "./MyComment";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RetryError from "@/components/RetryError";
 
 export default function MyItems() {
   const [activeTab, setActiveTab] = useState<"epigram" | "comment">("epigram");
@@ -14,6 +15,7 @@ export default function MyItems() {
     data: myEpigram,
     isLoading: isLoadingEpigram,
     isError: isErrorEpigram,
+    refetch,
   } = useEpigramList({
     limit: limit,
     writerId: user?.id,
@@ -32,9 +34,9 @@ export default function MyItems() {
   };
 
   if (isLoadingEpigram || isLoadingComment) return <LoadingSpinner />;
-  if (isErrorEpigram || isErrorComment) return <p>에러가 발생했습니다.</p>;
+  if (isErrorEpigram || isErrorComment) return <RetryError onRetry={refetch} />;
   if (!user || !myEpigram || !myComment)
-    return <p>데이터를 불러올 수 없습니다.</p>;
+    return <RetryError onRetry={refetch} />;
 
   return (
     <div className="max-w-[640px] w-full mx-auto px-6 md:px-0 mt-14">

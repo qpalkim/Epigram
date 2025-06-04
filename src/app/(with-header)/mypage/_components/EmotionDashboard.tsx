@@ -7,6 +7,7 @@ import Calendar, { CalendarProps } from "react-calendar";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import SelectOption from "@/components/SelectOption";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RetryError from "@/components/RetryError";
 import Image from "next/image";
 import chevronLeft from "@/assets/icons/chevron-left.svg";
 import chevornRight from "@/assets/icons/chevron-right.svg";
@@ -25,7 +26,7 @@ export default function EmotionDashboard() {
   const [value, setValue] = useState(new Date());
   const [filter, setFilter] = useState<string>("");
   const { data: user } = useMyData();
-  const { data, isLoading } = useEmotionLogsMonthly({
+  const { data, isLoading, isError, refetch } = useEmotionLogsMonthly({
     userId: user?.id,
     year: value.getFullYear(),
     month: value.getMonth() + 1,
@@ -94,6 +95,7 @@ export default function EmotionDashboard() {
   ).name as Emotion;
 
   if (isLoading) return <LoadingSpinner />;
+  if (isError) return <RetryError onRetry={refetch} />;
 
   return (
     <div className="relative flex flex-col">

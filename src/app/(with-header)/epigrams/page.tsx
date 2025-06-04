@@ -1,7 +1,7 @@
 import TodayEpigram from "./_components/TodayEpigram";
 import EmotionLogs from "@/components/EmotionLogs";
 import LatestEpigram from "./_components/LatestEpigram";
-import CommentList from "./_components/CommentList";
+import LatestComment from "./_components/LatestComment";
 import FloatingButton from "@/components/FloatingButton";
 
 export default function Page() {
@@ -22,7 +22,7 @@ export default function Page() {
       <h2 className="text-black-600 font-semibold text-lg lg:text-xl mt-14 lg:mt-35 mb-6 lg:mb-10">
         최신 댓글
       </h2>
-      <CommentList />
+      <LatestComment />
       <FloatingButton />
     </div>
   );

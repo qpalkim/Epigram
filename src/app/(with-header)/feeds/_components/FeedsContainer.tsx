@@ -4,6 +4,7 @@ import { useEpigramList } from "@/lib/hooks/useEpigrams";
 import EpigramItem from "@/components/EpigramItem";
 import Button from "@/components/Button";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RetryError from "@/components/RetryError";
 import Image from "next/image";
 import plus from "@/assets/icons/plus.svg";
 import sort from "@/assets/icons/sort.svg";
@@ -13,7 +14,7 @@ export default function FeedsContainer() {
   const [limit, setLimit] = useState(6);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isGridTwo, setIsGridTwo] = useState(false);
-  const { data, isLoading, isError } = useEpigramList({
+  const { data, isLoading, isError, refetch } = useEpigramList({
     limit: limit,
   });
 
@@ -34,7 +35,7 @@ export default function FeedsContainer() {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <p>에러가 발생했습니다.</p>;
+  if (isError) return <RetryError onRetry={refetch} />;
 
   return (
     <>
