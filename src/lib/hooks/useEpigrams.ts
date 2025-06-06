@@ -7,20 +7,16 @@ import {
   CreateEpigramResponse,
   CreateEpigramRequest,
   UpdateEpigramRequest,
-  LikeEpigramResponse,
-  DeleteLikeEpigramResponse,
   EpigramCommentListResponse,
   GetEpigramCommentListParams,
 } from "../types/epigrams";
 import {
   createEpigram,
   deleteEpigram,
-  deleteLikeEpigram,
   getEpigramCommentList,
   getEpigramList,
   getEpigramDetail,
   getEpigramToday,
-  likeEpigram,
   updateEpigram,
 } from "../apis/epigrams";
 
@@ -78,20 +74,6 @@ export const useDeleteEpigram = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["epigrams"] });
     },
-  });
-};
-
-// 에피그램 좋아요 훅
-export const useLikeEpigram = () => {
-  return useMutation<LikeEpigramResponse, unknown, number>({
-    mutationFn: (id: number) => likeEpigram(id),
-  });
-};
-
-// 에피그램 좋아요 삭제 훅
-export const useDeleteLikeEpigram = () => {
-  return useMutation<DeleteLikeEpigramResponse, unknown, number>({
-    mutationFn: (id: number) => deleteLikeEpigram(id),
   });
 };
 

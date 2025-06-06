@@ -6,8 +6,6 @@ import {
   createEpigramResponseSchema,
   DeleteEpigramResponse,
   deleteEpigramResponseSchema,
-  DeleteLikeEpigramResponse,
-  deleteLikeEpigramResponseSchema,
   EpigramCommentListResponse,
   epigramCommentListResponseSchema,
   EpigramDetailResponse,
@@ -18,8 +16,6 @@ import {
   EpigramTodayResponse,
   epigramTodayResponseSchema,
   GetEpigramListParams,
-  LikeEpigramResponse,
-  likeEpigramResponseSchema,
   UpdateEpigramRequest,
   UpdateEpigramResponse,
   updateEpigramResponseSchema,
@@ -79,24 +75,6 @@ export const deleteEpigram = async (id: number): Promise<void> => {
     `/epigrams/${id}`
   );
   safeResponse(response.data, deleteEpigramResponseSchema);
-};
-
-// 에피그램 좋아요 API
-export const likeEpigram = async (id: number): Promise<LikeEpigramResponse> => {
-  const response = await axiosClientHelper.post<LikeEpigramResponse>(
-    `/epigrams/${id}/like`
-  );
-  return safeResponse(response.data, likeEpigramResponseSchema);
-};
-
-// 에피그램 좋아요 삭제 API
-export const deleteLikeEpigram = async (
-  id: number
-): Promise<DeleteLikeEpigramResponse> => {
-  const response = await axiosClientHelper.delete<DeleteLikeEpigramResponse>(
-    `/epigrams/${id}/like`
-  );
-  return safeResponse(response.data, deleteLikeEpigramResponseSchema);
 };
 
 // 에피그램 댓글 목록 조회 API
