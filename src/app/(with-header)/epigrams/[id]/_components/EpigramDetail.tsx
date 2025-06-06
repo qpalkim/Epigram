@@ -1,39 +1,49 @@
 "use client";
 import { useState } from "react";
-import { notFound, useRouter } from "next/navigation";
-import { useDeleteEpigram, useEpigramDetail } from "@/lib/hooks/useEpigrams";
-import { useMyData } from "@/lib/hooks/useUsers";
-import Image from "next/image";
-import like from "@/assets/icons/like.svg";
-import externalLink from "@/assets/icons/external-link.svg";
-import tornPaper from "@/assets/images/torn-paper.svg";
+import { useRouter } from "next/navigation";
+import { useDeleteEpigram } from "@/lib/hooks/useEpigrams";
+import { EpigramDetailResponse } from "@/lib/types/epigrams";
+import { UserResponse } from "@/lib/types/users";
+import { toast } from "react-toastify";
 import BackgroundLines from "@/components/BackgroundLines";
 import Button from "@/components/Button";
 import Dropdown from "@/components/Dropdown";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import Modal from "@/components/Modal";
 import DeleteItemModal from "@/components/DeleteItemModal";
+import Image from "next/image";
+import share from "@/assets/icons/share.svg";
+import externalLink from "@/assets/icons/external-link.svg";
+import tornPaper from "@/assets/images/torn-paper.svg";
 
-export default function EpigramDetail({ id }: { id: number }) {
-  const { data: epigramDetail, isLoading, isError } = useEpigramDetail(id);
+type EpigramDetailProps = {
+  epigramDetail: EpigramDetailResponse;
+  user?: UserResponse;
+};
+
+export default function EpigramDetail({
+  epigramDetail,
+  user,
+}: EpigramDetailProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const deleteEpigram = useDeleteEpigram();
-  const { data: user } = useMyData();
 
   const isMineEpigram = user?.id === epigramDetail?.writerId;
 
   const handleDelete = () => {
-    deleteEpigram.mutate(id, {
+    deleteEpigram.mutate(epigramDetail.id, {
       onSuccess: () => {
         setIsModalOpen(false);
-        router.push("/epigrams");
+        router.replace("/epigrams");
       },
     });
   };
 
-  if (isLoading) return <LoadingSpinner />;
-  if (isError) return notFound();
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      toast.success("링크가 복사되었습니다.");
+    });
+  };
 
   return (
     <>
@@ -42,10 +52,16 @@ export default function EpigramDetail({ id }: { id: number }) {
         <div className="relative w-full max-w-[640px] mx-auto max-[1250px]:px-4 min-[1251px]:px-0 py-10 z-40">
           <div className="flex justify-between">
             <div>
-              {epigramDetail?.tags.map((tag) => (
-                <span className="text-blue-400" key={tag.id}>
+              {epigramDetail.tags.map((tag) => (
+                <button
+                  className="text-blue-400 cursor-pointer"
+                  key={tag.id}
+                  onClick={() =>
+                    router.push(`/search?limit=4&keyword=${tag.name}`)
+                  }
+                >
                   #{tag.name}&nbsp;
-                </span>
+                </button>
               ))}
             </div>
             {isMineEpigram && (
@@ -54,7 +70,7 @@ export default function EpigramDetail({ id }: { id: number }) {
                   {
                     label: "수정하기",
                     onClick: () => {
-                      router.push(`/epigrams/${id}/edit`);
+                      router.push(`/epigrams/${epigramDetail.id}/edit`);
                     },
                   },
                   {
@@ -74,15 +90,20 @@ export default function EpigramDetail({ id }: { id: number }) {
             - {epigramDetail?.author} -
           </p>
           <div className="flex justify-center mt-8 gap-2 z-10">
-            <Button isRoundedFull size="md" className="px-4" onClick={() => {}}>
+            <Button
+              isRoundedFull
+              size="md"
+              className="px-4"
+              onClick={handleCopyLink}
+            >
               <Image
-                src={like}
-                width={20}
-                height={20}
+                src={share}
+                width={14}
+                height={14}
                 alt="좋아요 아이콘"
-                className="mr-1"
+                className="mr-2"
               />
-              {epigramDetail?.likeCount}
+              링크 복사
             </Button>
 
             {epigramDetail?.referenceUrl && (
@@ -96,8 +117,8 @@ export default function EpigramDetail({ id }: { id: number }) {
                 {epigramDetail?.referenceTitle}
                 <Image
                   src={externalLink}
-                  width={20}
-                  height={20}
+                  width={24}
+                  height={24}
                   alt="출처 이동"
                 />
               </Button>
