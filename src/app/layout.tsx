@@ -5,7 +5,16 @@ import QueryClientProvider from "@/lib/network/QuerycClientProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://epigram-sand.vercel.app"),
   title: "날마다 에피그램 - Epigram",
+  description:
+    "나만 알던 소중한 글들을 다른 사람들에게 전파하고, 내 마음에 담긴 감정을 확인해 보세요.",
+  openGraph: {
+    title: "날마다 에피그램 - Epigram",
+    description:
+      "나만 알던 소중한 글들을 다른 사람들에게 전파하고, 내 마음에 담긴 감정을 확인해 보세요.",
+    images: ["/thumbnail.jpg"],
+  },
 };
 
 export default function RootLayout({

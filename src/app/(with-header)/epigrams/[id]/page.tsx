@@ -20,8 +20,6 @@ export async function generateMetadata({
       epigramDetailResponseSchema
     );
 
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-
     return {
       title: `${epigramDetail.content.slice(0, 20)}... | Epigram`,
       description: `“${epigramDetail.content}” - ${epigramDetail.author}`,
@@ -29,7 +27,7 @@ export async function generateMetadata({
         type: "article",
         title: `${epigramDetail.content.slice(0, 20)}... | Epigram`,
         description: `“${epigramDetail.content}” - ${epigramDetail.author}`,
-        url: `${baseUrl}/epigrams/${parsedId}`,
+        url: `https://epigram-sand.vercel.app/epigrams/${parsedId}`,
         images: [
           {
             url: "/thumbnail.jpg",
