@@ -14,13 +14,12 @@ import eye from "@/assets/icons/eye.svg";
 import eyeVisible from "@/assets/icons/eye-visible.svg";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-import SocialLogin from "@/components/SocialLogin";
 
 export default function LoginForm() {
   const { mutateAsync: login } = useLogin();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [showPw, setShowPw] = useState(false);
   const {
     register,
     handleSubmit,
@@ -36,8 +35,8 @@ export default function LoginForm() {
     try {
       await login(data);
       await queryClient.invalidateQueries({ queryKey: ["users"] });
-      toast.success("로그인에 성공했습니다.");
       router.push("/epigrams");
+      toast.success("로그인에 성공했습니다.");
     } catch {
       setError("email", {
         type: "manual",
@@ -63,21 +62,26 @@ export default function LoginForm() {
         />
         <div className="relative">
           <Input
-            type={isShowPassword ? "text" : "password"}
+            type={showPw ? "text" : "password"}
             placeholder="비밀번호를 입력하세요"
             {...register("password", {
               onBlur: () => trigger("password"),
             })}
             error={errors.password?.message}
           />
-          <Image
-            src={isShowPassword ? eyeVisible : eye}
-            width={24}
-            height={24}
-            alt="비밀번호 눈 아이콘"
-            onClick={() => setIsShowPassword((prev) => !prev)}
+          <button
+            type="button"
+            onClick={() => setShowPw(!showPw)}
             className="cursor-pointer absolute top-7 lg:top-9 right-4"
-          />
+            aria-label={showPw ? "비밀번호 숨기기" : "비밀번호 보기"}
+          >
+            <Image
+              src={showPw ? eyeVisible : eye}
+              width={24}
+              height={24}
+              alt="비밀번호 아이콘"
+            />
+          </button>
         </div>
         <Button
           type="submit"
@@ -88,13 +92,16 @@ export default function LoginForm() {
           로그인하기
         </Button>
       </form>
-      <p className="mt-12 text-center font-medium text-md lg:text-lg text-blue-400">
-        회원이 아니신가요?&nbsp;
-        <Link href="/signup" className="underline text-black-500">
-          회원가입하기
-        </Link>
-      </p>
-      <SocialLogin />
+      <div className="mt-12 flex items-center gap-4">
+        <div className="flex-grow border-t border-line-200" />
+        <p className="text-center font-medium text-md lg:text-lg text-blue-400">
+          회원이 아니신가요?&nbsp;
+          <Link href="/signup" className="underline text-black-500">
+            회원가입하기
+          </Link>
+        </p>
+        <div className="flex-grow border-t border-line-200" />
+      </div>
     </div>
   );
 }

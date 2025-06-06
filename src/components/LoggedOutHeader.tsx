@@ -1,7 +1,7 @@
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import logoSm from "@/assets/logo/logo-sm.svg";
+import logo from "@/assets/logo/logo-sm.svg";
 import search from "@/assets/icons/search.svg";
 import user from "@/assets/icons/user.svg";
 
@@ -24,14 +24,14 @@ export default function LoggedOutHeader() {
 
         <Link href="/" className="absolute left-1/2 -translate-x-1/2">
           <Image
-            src={logoSm}
+            src={logo}
             alt="로고"
             className="w-[101px] h-[26px] lg:w-[132px] lg:h-[36px]"
           />
         </Link>
 
         {!isAuthPage && (
-          <Link href="/mypage" className="absolute right-4">
+          <Link href="/login" className="absolute right-4">
             <Image
               src={user}
               alt="유저 아이콘"

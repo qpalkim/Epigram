@@ -3,9 +3,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useClickOutside } from "@/lib/utils/useClickOutside";
 import Link from "next/link";
 import Image from "next/image";
-import logoSm from "@/assets/logo/logo-sm.svg";
+import logo from "@/assets/logo/logo-sm.svg";
 import menu from "@/assets/icons/menu.svg";
-import xGray from "@/assets/icons/x-gray.svg";
+import close from "@/assets/icons/close.svg";
 import ProfileImage from "./ProfileImage";
 
 export default function LoggedInHeader({
@@ -35,7 +35,7 @@ export default function LoggedInHeader({
           />
           <Link href="/">
             <Image
-              src={logoSm}
+              src={logo}
               alt="로고"
               className="w-[101px] h-[26px] lg:w-[132px] lg:h-[36px]"
             />
@@ -79,7 +79,7 @@ export default function LoggedInHeader({
               transition={{ type: "tween", duration: 0.3 }}
             >
               <Image
-                src={xGray}
+                src={close}
                 width={24}
                 height={24}
                 alt="메뉴 닫기 아이콘"

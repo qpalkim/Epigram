@@ -13,7 +13,7 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Image from "next/image";
-import xGray from "@/assets/icons/x-gray.svg";
+import close from "@/assets/icons/close.svg";
 
 export default function EditEpigramForm() {
   const params = useParams();
@@ -191,7 +191,7 @@ export default function EditEpigramForm() {
                 {tag}
 
                 <Image
-                  src={xGray}
+                  src={close}
                   alt="태그 삭제 아이콘"
                   width={14}
                   height={14}
