@@ -18,9 +18,6 @@ const epigramSchema = z.object({
   id: z.number().min(1),
 });
 
-// 공통 좋아요 API 타입
-const likeSchema = epigramSchema.extend({ isLiked: z.boolean().optional() });
-
 // 에피그램 목록 조회 API 타입
 export const epigramListResponseSchema = z.object({
   totalCount: z.number(),
@@ -106,18 +103,6 @@ export const deleteEpigramResponseSchema = z.object({
 });
 
 export type DeleteEpigramResponse = z.infer<typeof deleteEpigramResponseSchema>;
-
-// 에피그램 좋아요 API 타입
-export const likeEpigramResponseSchema = likeSchema;
-
-export type LikeEpigramResponse = z.infer<typeof likeEpigramResponseSchema>;
-
-// 에피그램 좋아요 삭제 API 타입
-export const deleteLikeEpigramResponseSchema = likeSchema;
-
-export type DeleteLikeEpigramResponse = z.infer<
-  typeof deleteLikeEpigramResponseSchema
->;
 
 // 에피그램 댓글 목록 조회 API 타입
 export const epigramCommentListResponseSchema = z.object({

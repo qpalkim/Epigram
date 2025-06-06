@@ -28,10 +28,11 @@ export const useCreateEmotionLogsToday = () => {
 
 // 오늘의 감정 조회 훅
 export const useEmotionLogsToday = (userId?: number) => {
-  return useQuery<EmotionLogsTodayResponse>({
+  return useQuery<EmotionLogsTodayResponse | null>({
     queryKey: ["emotionLogs", userId],
     queryFn: () => getEmotionLogs(userId!),
     enabled: !!userId,
+    retry: false,
   });
 };
 

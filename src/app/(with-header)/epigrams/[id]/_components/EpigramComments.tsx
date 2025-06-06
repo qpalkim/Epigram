@@ -1,41 +1,49 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useCreateComment } from "@/lib/hooks/useComments";
-import { useEpigramCommentList } from "@/lib/hooks/useEpigrams";
-import { useMyData } from "@/lib/hooks/useUsers";
-import { UpdateCommentResponse } from "@/lib/types/comments";
+import {
+  CommentListResponse,
+  UpdateCommentResponse,
+} from "@/lib/types/comments";
+import { UserResponse } from "@/lib/types/users";
+import { toast } from "react-toastify";
 import Button from "@/components/Button";
 import ProfileImage from "@/components/ProfileImage";
-import Empty from "@/components/Empty";
 import CommentItem from "@/components/CommentItem";
-import LoadingSpinner from "@/components/LoadingSpinner";
-import RetryError from "@/components/RetryError";
+import Empty from "@/components/Empty";
 import Image from "next/image";
 import plus from "@/assets/icons/plus.svg";
 
-export default function EpigramComments({ id }: { id: number }) {
-  const [limit, setLimit] = useState(3);
+type EpigramCommentsProps = {
+  id: number;
+  comments: CommentListResponse;
+  user?: UserResponse;
+  setLimit: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export default function EpigramComments({
+  id,
+  comments,
+  user,
+  setLimit,
+}: EpigramCommentsProps) {
   const [addContent, setAddContent] = useState("");
-  const { data, isLoading, isError, refetch } = useEpigramCommentList(id, {
-    limit: limit,
-  });
-  const { data: user } = useMyData();
   const [isPrivate, setIsPrivate] = useState(false);
-  const [commentList, setCommentList] = useState(data?.list || []);
-  const [totalCount, setTotalCount] = useState(data?.totalCount || 0);
+  const [commentList, setCommentList] = useState(comments?.list || []);
+  const [totalCount, setTotalCount] = useState(comments?.totalCount || 0);
   const createComment = useCreateComment();
 
   useEffect(() => {
-    if (data?.list) {
-      setCommentList(data.list);
-      setTotalCount(data.totalCount);
+    if (comments?.list) {
+      setCommentList(comments.list);
+      setTotalCount(comments.totalCount);
     }
-  }, [data]);
+  }, [comments]);
 
   const handleLoadMore = (e: React.MouseEvent) => {
     e.preventDefault();
 
-    if ((commentList.length ?? 0) < (data?.totalCount ?? Infinity))
+    if ((commentList.length ?? 0) < (comments?.totalCount ?? Infinity))
       setLimit((prev) => prev + 3);
   };
 
@@ -51,6 +59,10 @@ export default function EpigramComments({ id }: { id: number }) {
           setCommentList((prev) => [newComment, ...prev]);
           setTotalCount((prev) => prev + 1);
           setAddContent("");
+          toast.success("댓글이 등록되었습니다.");
+        },
+        onError: () => {
+          toast.error("댓글 등록에 실패했습니다.");
         },
       }
     );
@@ -70,9 +82,6 @@ export default function EpigramComments({ id }: { id: number }) {
     );
     setTotalCount((prev) => Math.max(prev - 1, 0));
   };
-
-  if (isLoading) return <LoadingSpinner />;
-  if (isError) return <RetryError onRetry={refetch} />;
 
   return (
     <div className="mt-12 max-w-[640px] mx-auto mb-40 px-6 md:px-0">
@@ -144,7 +153,7 @@ export default function EpigramComments({ id }: { id: number }) {
             />
           ))}
 
-          {(commentList.length ?? 0) < (data?.totalCount ?? Infinity) && (
+          {(commentList.length ?? 0) < (comments?.totalCount ?? Infinity) && (
             <Button
               variant="outline"
               size="xl"

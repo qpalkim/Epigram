@@ -66,7 +66,8 @@ export default function EmotionLogs() {
   };
 
   if (isUserLoading || isLoading) return <LoadingSpinner />;
-  if (isError) return <RetryError onRetry={refetch} />;
+  if (isError && todayEmotionData === null)
+    return <RetryError onRetry={refetch} />;
 
   return (
     <div className="flex justify-center gap-4">
