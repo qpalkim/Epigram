@@ -4,8 +4,13 @@ import { epigramDetailResponseSchema } from "@/lib/types/epigrams";
 import axiosServerHelper from "@/lib/network/axiosServerHelper";
 import EpigramContainer from "./_components/EpigramContainer";
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const parsedId = Number(params.id);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const parsedId = Number(id);
   if (isNaN(parsedId)) notFound();
 
   try {
@@ -46,8 +51,13 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   }
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const parsedId = Number(params.id);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const parsedId = Number(id);
   if (isNaN(parsedId)) notFound();
 
   return <EpigramContainer id={parsedId} />;
