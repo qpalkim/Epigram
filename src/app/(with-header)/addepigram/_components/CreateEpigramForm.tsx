@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Image from "next/image";
-import xGray from "@/assets/icons/x-gray.svg";
+import close from "@/assets/icons/close.svg";
 
 export default function CreateEpigramForm() {
   const { mutate } = useCreateEpigram();
@@ -171,7 +171,7 @@ export default function CreateEpigramForm() {
                 {tag}
 
                 <Image
-                  src={xGray}
+                  src={close}
                   alt="태그 삭제 아이콘"
                   width={14}
                   height={14}

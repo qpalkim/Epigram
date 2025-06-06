@@ -1,5 +1,5 @@
 import Image from "next/image";
-import xGray from "@/assets/icons/x-gray.svg";
+import close from "@/assets/icons/close.svg";
 import ProfileImage from "./ProfileImage";
 
 export default function UserInfoModal({
@@ -15,7 +15,7 @@ export default function UserInfoModal({
     <div className="w-[280px] lg:w-[312px]">
       <div className="flex justify-end cursor-pointer">
         <Image
-          src={xGray}
+          src={close}
           width={24}
           height={24}
           alt="모달 닫기 아이콘"
