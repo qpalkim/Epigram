@@ -31,9 +31,6 @@ export const useUpdateMyData = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: UpdateUserRequest) => updateMyData(data),
-    onError: (error) => {
-      console.error("유저 정보 수정 실패:", error);
-    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
