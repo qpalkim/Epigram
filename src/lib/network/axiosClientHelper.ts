@@ -2,12 +2,20 @@ import axios, { isAxiosError } from "axios";
 import { toast } from "react-toastify";
 import { logout } from "../actions/logoutAction";
 
-let hasRedirectedFor401 = false;
-
 const axiosClientHelper = axios.create({
   baseURL: "/api",
   withCredentials: true,
 });
+
+const hasAlreadyRedirected = () => {
+  if (typeof window === "undefined") return false;
+  return sessionStorage.getItem("hasRedirectedFor401") === "true";
+};
+
+const markRedirected = () => {
+  if (typeof window === "undefined") return;
+  sessionStorage.setItem("hasRedirectedFor401", "true");
+};
 
 axiosClientHelper.interceptors.response.use(
   (response) => response,
@@ -18,8 +26,10 @@ axiosClientHelper.interceptors.response.use(
     const isOnLoginPage =
       typeof window !== "undefined" && window.location.pathname === "/login";
 
-    if (response?.status === 401 && !hasRedirectedFor401 && !isOnLoginPage) {
-      hasRedirectedFor401 = true;
+    const alreadyRedirected = hasAlreadyRedirected();
+
+    if (response?.status === 401 && !alreadyRedirected && !isOnLoginPage) {
+      markRedirected();
       toast.error("세션이 만료되었습니다. 다시 로그인해주세요.");
       await logout();
       setTimeout(() => {

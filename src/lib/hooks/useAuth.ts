@@ -27,8 +27,10 @@ export const useSignUp = () => {
 export const useLogin = () => {
   return useMutation<AuthResponse, Error, LoginRequest>({
     mutationFn: login,
-    onError: (error) => {
-      console.error("Login error:", error);
+    onSuccess: () => {
+      if (typeof window !== "undefined") {
+        sessionStorage.removeItem("hasRedirectedFor401");
+      }
     },
   });
 };
@@ -37,9 +39,6 @@ export const useLogin = () => {
 export const useRefreshToken = () => {
   return useMutation<RefreshTokenResponse, Error, void>({
     mutationFn: refreshToken,
-    onError: (error) => {
-      console.error("Token refresh error:", error);
-    },
   });
 };
 

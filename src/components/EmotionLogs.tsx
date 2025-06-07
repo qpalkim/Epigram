@@ -6,6 +6,7 @@ import {
 } from "@/lib/hooks/useEmotionLogs";
 import { useMyData } from "@/lib/hooks/useUsers";
 import { Emotion, EmotionLabels } from "@/lib/types/emotionLogs";
+import { isAxiosError } from "axios";
 import { toast } from "react-toastify";
 import LoadingSpinner from "./LoadingSpinner";
 import RetryError from "./RetryError";
@@ -60,9 +61,22 @@ export default function EmotionLogs() {
   }, [todayEmotionData]);
 
   const handleEmotionClick = (emotion: Emotion) => {
-    setSelectedEmotion(emotion);
-    mutation.mutate({ emotion });
-    toast.success("오늘의 감정이 선택되었습니다.");
+    mutation.mutate(
+      { emotion },
+      {
+        onSuccess: () => {
+          setSelectedEmotion(emotion);
+          toast.success("오늘의 감정이 선택되었습니다.");
+        },
+        onError: (error) => {
+          if (isAxiosError(error) && error.response?.status === 401) {
+            toast.error("로그인 후, 이용 가능합니다.");
+          } else {
+            toast.error("감정 선택에 실패했습니다.");
+          }
+        },
+      }
+    );
   };
 
   if (isUserLoading || isLoading) return <LoadingSpinner />;
