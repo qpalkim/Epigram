@@ -13,7 +13,6 @@ export const logout = async () => {
       error: "",
     };
   } catch (error) {
-    console.error(error);
     return { status: false, error: getErrorMessage(error) };
   }
 };
