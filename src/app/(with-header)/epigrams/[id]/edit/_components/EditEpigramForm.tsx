@@ -70,9 +70,8 @@ export default function EditEpigramForm() {
         toast.success("에피그램이 수정되었습니다!");
         router.push(`/epigrams/${updatedEpigram.id}`);
       },
-      onError: (error) => {
+      onError: () => {
         toast.error("수정에 실패했습니다.");
-        console.error(error);
       },
     });
   };

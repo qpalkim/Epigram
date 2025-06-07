@@ -42,8 +42,6 @@ export const POST = async (request: NextRequest) => {
       }
     );
 
-    console.log(apiResponse.data);
-
     const response = NextResponse.json(
       omit(apiResponse.data, ["accessToken", "refreshToken"]),
       {
