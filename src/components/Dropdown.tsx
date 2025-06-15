@@ -31,7 +31,7 @@ export default function Dropdown({ options }: DropdownProps) {
       />
 
       {isOpen && (
-        <ul className="absolute right-0 mt-1 cursor-pointer rounded-2xl border border-blue-300 bg-background-100 drop-shadow-sm z-10 whitespace-nowrap">
+        <ul className="absolute right-0 mt-1 cursor-pointer rounded-2xl border border-blue-300 bg-background-100 drop-shadow-sm z-10 whitespace-nowrap overflow-hidden">
           {options.map((option, index) => (
             <li key={option.label}>
               <button
@@ -39,7 +39,7 @@ export default function Dropdown({ options }: DropdownProps) {
                   option.onClick();
                   setIsOpen(false);
                 }}
-                className={`text-md lg:text-lg cursor-pointer text-center font-medium px-6 lg:px-8 py-2 lg:py-3 text-black-600 hover:bg-blue-200 ${
+                className={`text-md lg:text-lg cursor-pointer text-center font-medium px-6 lg:px-8 py-2 lg:py-3 text-black-600 hover:bg-blue-200 transition ${
                   index === 0 ? "rounded-t-2xl" : ""
                 } ${
                   index === options.length - 1
