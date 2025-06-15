@@ -58,7 +58,7 @@ export default function SignUpForm() {
     <div className="relative mx-auto max-w-[640px] min-w-[312px] mt-14 mb-14 md:mt-20 md:mb-20 px-4 md:px-0">
       <div className="flex justify-center mb-12">
         <Link href="/">
-          <Image src={logo} alt="로고" width={172} height={48} />
+          <Image src={logo} alt="로고" className="w-[172px] h-[48px]" />
         </Link>
       </div>
       <form

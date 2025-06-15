@@ -49,6 +49,8 @@ export default function ProfileImage({
         src={src || defaultProfile}
         alt="프로필 이미지"
         fill
+        sizes="(max-width: 768px) 64px, (max-width: 1024px) 80x, 96px"
+        priority
       />
     </div>
   );

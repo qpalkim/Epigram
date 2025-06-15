@@ -47,13 +47,14 @@ const SectionContent = ({
         reverse ? "lg:flex-row-reverse" : "lg:flex-row"
       } lg:gap-[80px] lg:items-end items-start lg:w-full lg:max-w-[1200px] lg:px-6 mx-auto`}
     >
-      <motion.div className="shadow-sm rounded-2xl md:hidden" {...motionProps}>
+      <motion.div
+        className="relative w-[312px] h-[210px] shadow-sm rounded-2xl overflow-hidden md:hidden"
+        {...motionProps}
+      >
         <Image
           src={mbImage}
           alt="모바일 섹션 카드"
-          width={312}
-          height={210}
-          className="shadow-sm rounded-2xl"
+          className="absolute object-contain shadow-sm rounded-2xl"
         />
       </motion.div>
       <motion.div
@@ -66,6 +67,7 @@ const SectionContent = ({
           width={384}
           height={240}
           className="shadow-sm rounded-2xl"
+          style={{ width: "auto", height: "auto" }}
         />
       </motion.div>
       <motion.div
@@ -164,6 +166,7 @@ export default function MainSection({ scrollRef }: MainSectionProps) {
             alt="모바일 에피그램 이미지"
             width={312}
             height={576}
+            style={{ width: "auto", height: "auto" }}
           />
         </motion.div>
         <motion.div className="hidden md:block lg:hidden" {...motionProps}>
@@ -172,6 +175,7 @@ export default function MainSection({ scrollRef }: MainSectionProps) {
             alt="태블릿 에피그램 이미지"
             width={384}
             height={688}
+            style={{ width: "auto", height: "auto" }}
           />
         </motion.div>
         <motion.div className="hidden lg:block" {...motionProps}>
@@ -180,6 +184,7 @@ export default function MainSection({ scrollRef }: MainSectionProps) {
             alt="PC 에피그램 이미지"
             width={640}
             height={864}
+            style={{ width: "auto", height: "auto" }}
           />
         </motion.div>
       </div>

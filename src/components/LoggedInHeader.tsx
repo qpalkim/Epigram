@@ -38,6 +38,7 @@ export default function LoggedInHeader({
               src={logo}
               alt="로고"
               className="w-[101px] h-[26px] lg:w-[132px] lg:h-[36px]"
+              priority
             />
           </Link>
           <Link

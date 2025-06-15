@@ -50,7 +50,7 @@ export default function LoginForm() {
     <div className="relative mx-auto max-w-[640px] min-w-[312px] mt-40 mb-40 md:mt-35 md:mb-35 px-4 md:px-0">
       <div className="flex justify-center mb-12">
         <Link href="/">
-          <Image src={logo} alt="로고" width={172} height={48} />
+          <Image src={logo} alt="로고" className="w-[172px] h-[48px]" />
         </Link>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
