@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   CreateProfileImageParams,
   GetUserCommentListParams,
@@ -57,6 +62,7 @@ export const useUserCommentList = (
     queryKey: ["users", id, params],
     queryFn: () => getUserCommentList(id!, params),
     enabled: !!id,
+    placeholderData: keepPreviousData,
   });
 };
 

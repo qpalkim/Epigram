@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   GetEpigramListParams,
   EpigramListResponse,
@@ -25,6 +30,7 @@ export const useEpigramList = (params: GetEpigramListParams) => {
   return useQuery<EpigramListResponse>({
     queryKey: ["epigrams", params],
     queryFn: () => getEpigramList(params),
+    placeholderData: keepPreviousData,
   });
 };
 
@@ -85,5 +91,6 @@ export const useEpigramCommentList = (
   return useQuery<EpigramCommentListResponse>({
     queryKey: ["epigrams", id, params],
     queryFn: () => getEpigramCommentList(id!, params),
+    placeholderData: keepPreviousData,
   });
 };

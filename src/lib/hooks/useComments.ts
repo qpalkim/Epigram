@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   CommentListResponse,
   CreateCommentRequest,
@@ -29,6 +34,7 @@ export const useCommentList = (params: GetCommentListParams) => {
   return useQuery<CommentListResponse>({
     queryKey: ["comments", params],
     queryFn: () => getCommentList(params),
+    placeholderData: keepPreviousData,
   });
 };
 
