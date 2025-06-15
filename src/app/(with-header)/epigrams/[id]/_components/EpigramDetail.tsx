@@ -114,7 +114,9 @@ export default function EpigramDetail({
                 href={epigramDetail?.referenceUrl}
                 target="_blank"
               >
-                {epigramDetail?.referenceTitle}
+                <span className="max-w-[140px] truncate inline-block align-middle">
+                  {epigramDetail?.referenceTitle}
+                </span>
                 <Image
                   src={externalLink}
                   width={24}
