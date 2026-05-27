@@ -21,7 +21,7 @@ export default function LogoSection() {
         <Image
           src={logoText}
           alt="날마다 에피그램 로고"
-          className="w-[122px] h-[70px] lg:w-[184px] lg:h-[105px] mb-[32px] lg:mb-[48px] mx-auto"
+          className="w-[122px] h-[70px] lg:w-[184px] lg:h-[105px] mb-[32px] lg:mb-[48px] mx-auto select-none pointer-events-none"
         />
         <Button
           variant="primary"

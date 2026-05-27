@@ -43,9 +43,8 @@ const SectionContent = ({
 }: SectionContentProps) => {
   return (
     <div
-      className={`flex flex-col ${
-        reverse ? "lg:flex-row-reverse" : "lg:flex-row"
-      } lg:gap-[80px] lg:items-end items-start lg:w-full lg:max-w-[1200px] lg:px-6 mx-auto`}
+      className={`flex flex-col ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"
+        } lg:gap-[80px] lg:items-end items-start lg:w-full lg:max-w-[1200px] lg:px-6 mx-auto`}
     >
       <motion.div
         className="relative w-[312px] h-[210px] shadow-sm rounded-2xl overflow-hidden md:hidden"
@@ -54,7 +53,7 @@ const SectionContent = ({
         <Image
           src={mbImage}
           alt="모바일 섹션 카드"
-          className="absolute object-contain shadow-sm rounded-2xl"
+          className="absolute object-contain shadow-sm rounded-2xl select-none pointer-events-none"
         />
       </motion.div>
       <motion.div
@@ -66,7 +65,7 @@ const SectionContent = ({
           alt="태블릿 섹션 카드"
           width={384}
           height={240}
-          className="shadow-sm rounded-2xl"
+          className="shadow-sm rounded-2xl select-none pointer-events-none"
           style={{ width: "auto", height: "auto" }}
         />
       </motion.div>
@@ -77,13 +76,12 @@ const SectionContent = ({
         <Image
           src={pcImage}
           alt="PC 섹션 카드"
-          className="w-full max-w-[744px] min-w-[384px] shadow-sm rounded-2xl"
+          className="w-full max-w-[744px] min-w-[384px] shadow-sm rounded-2xl select-none pointer-events-none"
         />
       </motion.div>
       <div
-        className={`mt-[40px] lg:mt-0 w-full min-w-[312px] max-w-[384px] ${
-          reverse ? "text-right lg:self-end" : "lg:self-end"
-        }`}
+        className={`mt-[40px] lg:mt-0 w-full min-w-[312px] max-w-[384px] ${reverse ? "text-right lg:self-end" : "lg:self-end"
+          }`}
       >
         <div className="font-bold text-black-950 text-2xl lg:text-3xl">
           {title}
@@ -167,6 +165,7 @@ export default function MainSection({ scrollRef }: MainSectionProps) {
             width={312}
             height={576}
             style={{ width: "auto", height: "auto" }}
+            className="select-none pointer-events-none"
           />
         </motion.div>
         <motion.div className="hidden md:block lg:hidden" {...motionProps}>
@@ -176,6 +175,7 @@ export default function MainSection({ scrollRef }: MainSectionProps) {
             width={384}
             height={688}
             style={{ width: "auto", height: "auto" }}
+            className="select-none pointer-events-none"
           />
         </motion.div>
         <motion.div className="hidden lg:block" {...motionProps}>
@@ -185,6 +185,7 @@ export default function MainSection({ scrollRef }: MainSectionProps) {
             width={640}
             height={864}
             style={{ width: "auto", height: "auto" }}
+            className="select-none pointer-events-none"
           />
         </motion.div>
       </div>
