@@ -6,6 +6,7 @@ const AFTER_LOGIN_DOMAIN = [
   "/addepigram",
   "/epigrams",
 ] satisfies readonly string[];
+
 const BEFORE_LOGIN_DOMAIN = [
   "/",
   "/login",
@@ -26,21 +27,19 @@ export const middleware = async (request: NextRequest) => {
   );
   const isBeforeLoginRoute = BEFORE_LOGIN_DOMAIN.includes(pathname);
   const isLoggedIn = accessToken?.value || refreshToken?.value;
+  const isAuthRoute = pathname === "/login" || pathname === "/signup";
 
   if (pathname === "/") return NextResponse.next();
 
   if (isBeforeLoginRoute) {
-    if (isLoggedIn && (pathname === "/login" || pathname === "/signup")) {
+    if (isLoggedIn && isAuthRoute) {
       return NextResponse.redirect(new URL("/epigrams", request.nextUrl), 302);
     }
     return NextResponse.next();
   }
 
-  if (isAfterLoginRoute) {
-    if (!isLoggedIn) {
-      return NextResponse.redirect(new URL("/login", request.nextUrl), 302);
-    }
-    return NextResponse.next();
+  if (isAfterLoginRoute && !isLoggedIn) {
+    return NextResponse.redirect(new URL("/login", request.nextUrl), 302);
   }
 
   return NextResponse.next();
