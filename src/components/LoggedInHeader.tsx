@@ -15,10 +15,10 @@ export default function LoggedInHeader({
   nickname: string;
   image: string | null;
 }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
-  const closeMenu = () => setIsMenuOpen(false);
-  useClickOutside(menuRef, () => setIsMenuOpen(false));
+  const closeMenu = () => setIsOpen(false);
+  useClickOutside(menuRef, () => setIsOpen(false));
 
   return (
     <header className="fixed w-full bg-blue-100 border-b border-gray-100 z-50">
@@ -31,7 +31,7 @@ export default function LoggedInHeader({
             height={24}
             alt="메뉴 열기 아이콘"
             aria-label="메뉴 열기"
-            onClick={() => setIsMenuOpen(true)}
+            onClick={() => setIsOpen(true)}
           />
           <Link href="/">
             <Image
@@ -63,7 +63,7 @@ export default function LoggedInHeader({
       </div>
 
       <AnimatePresence>
-        {isMenuOpen && (
+        {isOpen && (
           <motion.div
             className="fixed inset-0 bg-black/40 z-40"
             initial={{ opacity: 0 }}

@@ -4,10 +4,10 @@ import LoggedInHeader from "./LoggedInHeader";
 import LoggedOutHeader from "./LoggedOutHeader";
 
 export default function Header() {
-  const { data: user } = useMyData();
+  const { data: me } = useMyData();
 
-  return user ? (
-    <LoggedInHeader nickname={user.nickname} image={user.image} />
+  return me ? (
+    <LoggedInHeader nickname={me.nickname} image={me.image} />
   ) : (
     <LoggedOutHeader />
   );
