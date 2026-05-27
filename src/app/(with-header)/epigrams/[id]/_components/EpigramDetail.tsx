@@ -83,7 +83,7 @@ export default function EpigramDetail({
               />
             )}
           </div>
-          <h1 className="font-iropke text-black-700 font-medium text-2lg md:text-xl mt-4 md:mt-6">
+          <h1 className="font-iropke whitespace-pre-wrap break-words text-black-700 font-medium text-2lg md:text-xl mt-4 md:mt-6">
             {epigramDetail?.content}
           </h1>
           <p className="font-iropke text-lg lg:text-2lg text-blue-400 mt-4 text-right">

@@ -27,11 +27,6 @@ export const useSignUp = () => {
 export const useLogin = () => {
   return useMutation<AuthResponse, Error, LoginRequest>({
     mutationFn: login,
-    onSuccess: () => {
-      if (typeof window !== "undefined") {
-        sessionStorage.removeItem("hasRedirectedFor401");
-      }
-    },
   });
 };
 

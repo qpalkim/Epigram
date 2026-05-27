@@ -14,8 +14,8 @@ export const GET = async (request: NextRequest) => {
       endPoint,
       !isEmpty(searchParams)
         ? {
-            params: searchParams,
-          }
+          params: searchParams,
+        }
         : {}
     );
     return NextResponse.json(apiResponse.data, { status: apiResponse.status });
@@ -50,6 +50,7 @@ export const POST = async (request: NextRequest) => {
     );
     const accessToken = apiResponse.data.accessToken;
     const refreshToken = apiResponse.data.refreshToken;
+
     if (endPoint === "/auth/signIn") {
       response.cookies.set("accessToken", accessToken, {
         httpOnly: true,
@@ -75,16 +76,21 @@ export const POST = async (request: NextRequest) => {
 export const PUT = async (request: NextRequest) => {
   const url = new URL(request.url);
   const endPoint = url.pathname.replace(/^\/api/, "");
+
   try {
     const apiResponse = await axiosServerHelper.put(
       endPoint,
       await request.json()
     );
+
     if (isEmpty(apiResponse.data))
       return new NextResponse(null, {
         status: apiResponse.status,
       });
-    return NextResponse.json(apiResponse.data, { status: apiResponse.status });
+
+    return NextResponse.json(apiResponse.data, {
+      status: apiResponse.status
+    });
   } catch (error) {
     return errorResponse(error);
   }
@@ -93,12 +99,15 @@ export const PUT = async (request: NextRequest) => {
 export const DELETE = async (request: NextRequest) => {
   const url = new URL(request.url);
   const endPoint = url.pathname.replace(/^\/api/, "");
+
   try {
     const apiResponse = await axiosServerHelper.delete(endPoint);
+
     if (isEmpty(apiResponse.data))
       return new NextResponse(null, {
         status: apiResponse.status,
       });
+
     return NextResponse.json(apiResponse.data, { status: apiResponse.status });
   } catch (error) {
     return errorResponse(error);
@@ -114,10 +123,12 @@ export const PATCH = async (request: NextRequest) => {
       endPoint,
       await request.json()
     );
+
     if (isEmpty(apiResponse.data))
       return new NextResponse(null, {
         status: apiResponse.status,
       });
+
     return NextResponse.json(apiResponse.data, { status: apiResponse.status });
   } catch (error) {
     return errorResponse(error);

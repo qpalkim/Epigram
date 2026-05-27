@@ -43,7 +43,7 @@ export default function EpigramItem({
           />
           <div className="z-10 relative h-full flex flex-col justify-between">
             <div
-              className={clsx("text-md lg:text-lg font-medium text-black-600", {
+              className={clsx("text-md lg:text-lg font-medium text-black-600 whitespace-pre-wrap break-words", {
                 "line-clamp-2 md:line-clamp-3 lg:line-clamp-none break-keep overflow-hidden":
                   isFeedPage,
               })}

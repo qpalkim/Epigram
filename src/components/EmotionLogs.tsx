@@ -88,23 +88,21 @@ export default function EmotionLogs() {
       {emotions.map((emotion) => (
         <div
           key={emotion.label}
-          className="min-w-[56px] max-w-[96px] w-full aspect-square"
+          className="min-w-[56px] min-h-[56px] max-w-[96px] max-h-[96px] w-full h-full aspect-square"
         >
           <div
             onClick={() => handleEmotionClick(emotion.label)}
             className={`w-full h-full flex items-center justify-center hover:bg-blue-100
-              ${
-                selectedEmotion === emotion.label
-                  ? "bg-blue-100"
-                  : "bg-blue-200"
+              ${selectedEmotion === emotion.label
+                ? "bg-blue-100"
+                : "bg-blue-200"
               }
               ${emotionColors[emotion.label].hover}
-               cursor-pointer p-3 md:p-4 lg:p-6 rounded-2xl 
+               cursor-pointer p-3 md:p-4 lg:p-6 rounded-xl md:rounded-2xl
                border-2 transition-colors duration-200 
-              ${
-                selectedEmotion === emotion.label
-                  ? emotionColors[emotion.label].base
-                  : "border-transparent"
+              ${selectedEmotion === emotion.label
+                ? emotionColors[emotion.label].base
+                : "border-transparent"
               }`}
           >
             <Image
@@ -116,11 +114,10 @@ export default function EmotionLogs() {
             />
           </div>
           <p
-            className={`mt-2 font-semibold text-center text-md md:text-lg ${
-              selectedEmotion === emotion.label
-                ? "text-sub-blue-600"
-                : "text-gray-400"
-            }`}
+            className={`mt-2 font-semibold text-center text-md md:text-lg ${selectedEmotion === emotion.label
+              ? "text-sub-blue-600"
+              : "text-gray-400"
+              }`}
           >
             {EmotionLabels[emotion.label]}
           </p>
